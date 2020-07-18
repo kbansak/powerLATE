@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![Travis build
+status](https://travis-ci.com/EddieYang211/powerLATE.svg?branch=master)](https://travis-ci.com/EddieYang211/powerLATE)
 <!-- badges: end -->
 
 The goal of powerLATE is to provide a generalized approach power
