@@ -3,9 +3,6 @@
 language: R
 cache: packages
 warnings_are_errors: true
-
-before_install:
-  - tlmgr install BasicTeX
   
 os:
   - linux

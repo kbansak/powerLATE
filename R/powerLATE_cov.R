@@ -21,7 +21,29 @@
 #' @export
 #' @author Kirk Bansak
 #' @references Bansak, K. (2020). A Generalized Approach to Power Analysis for Local Average Treatment Effects. Statistical Science, 35(2), 254-271.
-#' @example
+#' @examples
+#' 
+#' #######################################################
+#' ### Example 1: 
+#' ### LATE w/ equal assigment w/o ordered mean assumption
+#' #######################################################
+#' 
+#' res <- powerLATE.cov(pZ=0.5, pi=0.35, kappa=seq(0.4, 1.0, 0.1), power=0.8,
+#'                      r2dw=0.2, r2yw=0.15)
+#' 
+#' # also returns an invisible object: output.parameter
+#' res$output.parameter
+#' 
+#' #######################################################
+#' ### Example 2: 
+#' ### LATE w/o equal assigment w/ ordered mean assumption
+#' #######################################################
+#' 
+#' res <- powerLATE.cov(pZ=0.67, pi=0.35, kappa=seq(0.4, 1.0, 0.1), 
+#'                 power=0.8, assume.ord.means=T, r2dw=0.2, r2yw=0.15)
+#' 
+#' # also returns an invisible object: output.parameter
+#' res$output.parameter
 
 
 powerLATE.cov <- function(pZ = 0.5,

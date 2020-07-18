@@ -38,6 +38,29 @@ Main function to perform generalized power analysis for LATE
 \details{
 Exactly two of the parameters \{kappa, N, power\} must be supplied, from which the third (target) parameter will be calculated. If effect.size==FALSE, exactly two of the parameters \{tau, N, power\} must be supplied.
 }
+\examples{
+
+#######################################################
+### Example 1: 
+### LATE w/ equal assigment w/o ordered mean assumption
+#######################################################
+
+res <- powerLATE(pZ=0.5, pi=0.35, kappa=seq(0.4, 1.0, 0.1), power=0.8)
+
+# also returns an invisible object: output.parameter
+res$output.parameter
+
+#######################################################
+### Example 2: 
+### LATE w/o equal assigment w/ ordered mean assumption
+#######################################################
+
+res <- powerLATE(pZ=0.67, pi=0.35, kappa=seq(0.4, 1.0, 0.1), 
+                power=0.8, assume.ord.means=T)
+
+# also returns an invisible object: output.parameter
+res$output.parameter
+}
 \references{
 Bansak, K. (2020). A Generalized Approach to Power Analysis for Local Average Treatment Effects. Statistical Science, 35(2), 254-271.
 }
