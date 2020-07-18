@@ -9,9 +9,9 @@ os:
   - osx
   
 r:
+  - 3.3
   - 3.4
   - release
-  - devel
 
 after_success:
   - Rscript -e 'covr::codecov(type = "all")'
