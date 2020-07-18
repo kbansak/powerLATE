@@ -38,20 +38,12 @@ This is a basic example which shows you how to solve a common problem:
 ```{r example}
 library(powerLATE)
 ## basic example code
+res <- powerLATE.cov(pZ=0.5, pi=0.35, kappa=seq(0.4, 1.0, 0.1), power=0.8,
+                     r2dw=0.2, r2yw=0.15)
+
+# also returns an invisible object: output.parameter
+res$output.parameter
+
+res <- powerLATE.cov(pZ=0.67, pi=0.35, kappa=seq(0.4, 1.0, 0.1), 
+                power=0.8, assume.ord.means=TRUE, r2dw=0.2, r2yw=0.15)
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!

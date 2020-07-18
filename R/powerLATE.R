@@ -36,7 +36,7 @@
 #' #######################################################
 #' 
 #' res <- powerLATE(pZ=0.67, pi=0.35, kappa=seq(0.4, 1.0, 0.1), 
-#'                 power=0.8, assume.ord.means=T)
+#'                 power=0.8, assume.ord.means=TRUE)
 #' 
 #' # also returns an invisible object: output.parameter
 #' res$output.parameter

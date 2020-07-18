@@ -61,7 +61,7 @@ res$output.parameter
 #######################################################
 
 res <- powerLATE.cov(pZ=0.67, pi=0.35, kappa=seq(0.4, 1.0, 0.1), 
-                power=0.8, assume.ord.means=T, r2dw=0.2, r2yw=0.15)
+                power=0.8, assume.ord.means=TRUE, r2dw=0.2, r2yw=0.15)
 
 # also returns an invisible object: output.parameter
 res$output.parameter
