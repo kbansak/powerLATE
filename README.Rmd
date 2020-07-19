@@ -21,7 +21,9 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/EddieYang211/powerLATE/branch/master/graph/badge.svg)](https://codecov.io/gh/EddieYang211/powerLATE?branch=master)
 <!-- badges: end -->
 
-The goal of powerLATE is to provide a generalized approach power analysis in the context of estimating a local average treatment effect (LATE), where the study subjects exhibit noncompliance with treatment assignment. powerLATE uses standardized effect sizes to place bounds on the power for the most commonly used estimator of the LATE, the Wald IV estimator, whereby variance terms and distributional parameters need not be specified nor assumed. Instead, in addition to the effect size, sample size, and error tolerance parameters, the only other parameter that must be specified by the researcher is the compliance rate. Additional conditions can also be introduced to further narrow the bounds on the power calculation.
+The goal of powerLATE is to provide a generalized approach to power analysis in the context of estimating a local average treatment effect (LATE), where the study subjects exhibit noncompliance with treatment assignment. 
+
+powerLATE uses standardized effect sizes to place bounds on the power for the most commonly used estimator of the LATE, the Wald IV estimator, whereby variance terms and distributional parameters need not be specified nor assumed. Instead, in addition to the effect size, sample size, and error tolerance parameters, the only other parameter that must be specified by the researcher is the compliance rate. Additional conditions can also be introduced to further narrow the bounds on the power calculation.
 
 ## Installation
 
@@ -30,20 +32,65 @@ You can install the released version of powerLATE from [CRAN](https://CRAN.R-pro
 ``` r
 install.packages("powerLATE")
 ```
+Or the development version from GitHub:
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
-library(powerLATE)
-## basic example code
-res <- powerLATE.cov(pZ=0.5, pi=0.35, kappa=seq(0.4, 1.0, 0.1), power=0.8,
-                     r2dw=0.2, r2yw=0.15)
-
-# also returns an invisible object: output.parameter
-res$output.parameter
-
-res <- powerLATE.cov(pZ=0.67, pi=0.35, kappa=seq(0.4, 1.0, 0.1), 
-                power=0.8, assume.ord.means=TRUE, r2dw=0.2, r2yw=0.15)
+``` r
+# install.packages("devtools")
+devtools::install_github("EddieYang211/powerLATE")
 ```
+
+## Getting started
+
+```{r}
+library(powerLATE)
+```
+
+powerLATE provides two main functions:
+
+* `powerLATE`, which computes the power of the Wald IV estimator, or determines parameters to obtain a target power.
+
+* `powerLATE.cov`, which is similar to `powerLATE` but additioanlly allows the inclusion of covariates. 
+
+
+## Examples
+
+Suppose we are interested in the power of an experiment, in which exactly half of the experimental subjects will be assigned to treatment and the other half to control. Further suppose the sample size is 800, the compliance rate is 0.35 and the treatment effect size is 0.8. We can compute the power of this experiment by the following:
+
+```{r}
+library(powerLATE)
+res <- powerLATE(pZ = 0.5, N = 800, pi = 0.35, kappa =0.8)
+```
+
+If absolute effect is desired instead of effect size, simply set `effect.size=FALSE` and supply `omega`, the pooled standard deviation across treatment groups, and `tau`, the absolute effect.
+```{r}
+res <- powerLATE(pZ=0.5, N=800, pi=0.35, omega = 0.6, tau = 0.4, effect.size = FALSE)
+```
+
+We can also input a vector of values for any one parameter in the set \{N, kappa, power, pi, tau, omega\}.
+
+```{r}
+res <- powerLATE(pZ = 0.5, N = 800, pi = 0.35, kappa = seq(0.5, 1.0, 0.1))
+```
+
+With covaraites, 
+
+```{r}
+res <- powerLATE.cov(pZ = 0.5, N = 800, pi = 0.35, kappa = seq(0.5, 1.0, 0.1), r2dw = 0.2, r2yw = 0.3)
+```
+
+In addition to the message that is automatically printed out, `powerLATE` and `powerLATE.cov` also return the output parameter values as an invisible object, simply query
+
+```{r}
+res <- powerLATE(pZ = 0.5, N = 800, pi = 0.35, kappa = seq(0.5, 1.0, 0.1))
+res$output.parameter
+```
+
+## Reference
+
+For a detailed description of the method see:
+
+- [Bansak, K. (2020). A Generalized Approach to Power Analysis for Local Average Treatment Effects](https://projecteuclid.org/download/pdfview_1/euclid.ss/1591171230)
+
+## Maintainer 
+
+- [Eddie Yang](https://github.com/EddieYang211)

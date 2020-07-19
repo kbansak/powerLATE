@@ -205,6 +205,7 @@ powerLATE.cov <- function(pZ = 0.5,
         	row.names = c(NA, length(out)),
         	class = "data.frame")
 		output <- t(res[,output.name[1]])
+		rownames(output) <- output.name[1]
 	} else{
 		res <- out
 		names(res) <- output.name[1]
@@ -229,12 +230,12 @@ powerLATE.cov <- function(pZ = 0.5,
 		cat("\nNOTE: The Ordered-Means assumption is being employed. User should confirm that the assumption is reasonable in the context of interest. The Homoskedasticity assumption is currently being made because pZ does not equal 0.5.", fill=TRUE)
 	}
 
-	output.para.name <- colnames(res)[1]
-	output.para <- structure(
-		list(output = output),
-		row.names = output.para.name,
-		class = "data.frame")
-	out <- list(input.parameter=input.para, output.parameter=output.para)
+	#output.para.name <- colnames(res)[1]
+	#output.para <- structure(
+	#	list(output = output),
+	#	row.names = output.para.name,
+	#	class = "data.frame")
+	out <- list(input.parameter=input.para, output.parameter=output)
 	return(invisible(out))
 }
 
