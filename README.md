@@ -130,7 +130,7 @@ res <- powerLATE(pZ = 0.5, N = 800, pi = 0.35, kappa = seq(0.5, 1.0, 0.1))
 #> NOTE: The Ordered-Means assumption is not being employed. If the user would like to make this assumption to narrow the bounds, set the argument assume.ord.means to TRUE.
 ```
 
-With covaraites,
+With covariates,
 
 ``` r
 res <- powerLATE.cov(pZ = 0.5, N = 800, pi = 0.35, kappa = seq(0.5, 1.0, 0.1), r2dw = 0.2, r2yw = 0.3)

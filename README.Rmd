@@ -72,7 +72,7 @@ We can also input a vector of values for any one parameter in the set \{N, kappa
 res <- powerLATE(pZ = 0.5, N = 800, pi = 0.35, kappa = seq(0.5, 1.0, 0.1))
 ```
 
-With covaraites, 
+With covariates, 
 
 ```{r}
 res <- powerLATE.cov(pZ = 0.5, N = 800, pi = 0.35, kappa = seq(0.5, 1.0, 0.1), r2dw = 0.2, r2yw = 0.3)
