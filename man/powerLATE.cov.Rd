@@ -18,13 +18,13 @@ powerLATE.cov(pZ = 0.5, pi, N, kappa,
 
 \item{kappa}{effect size.}
 
-\item{tau}{absolute effect. Must only be supplied if \code{effect.size = FALSE}.}
-
 \item{sig.level}{significance level (Type I error probability). Default is 0.05.}
 
 \item{power}{power of test (1 minus Type II error probability).}
 
 \item{effect.size}{whether effect size (kappa) rather than absolute effect (tau) is used in power calculations. Default is \code{TRUE}.}
+
+\item{tau}{absolute effect. Must only be supplied if \code{effect.size = FALSE}.}
 
 \item{omega}{within-group standard deviation of the outcome. Must be supplied if \code{effect.size = FALSE}. See Details.}
 

@@ -74,10 +74,10 @@ powerLATE.cov <- function(
 	pi,
 	N,
 	kappa,
-	tau = NULL,
 	sig.level = 0.05,
 	power,
 	effect.size = TRUE,
+	tau = NULL,
 	omega = NULL,
 	assume.ord.means = FALSE,
 	r2dw,
@@ -219,7 +219,7 @@ powerLATE.cov <- function(
 			warning("Some of the returned values are invalid, indicating that results are not feasible for those parameters, coercing into NAs")
 		}		
 	}
-	
+
 	if (!effect.size && target==1){
 		out <- out*omega
 		output.name[1]  <- "tau"
