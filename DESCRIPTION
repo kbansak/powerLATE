@@ -2,9 +2,12 @@ Package: powerLATE
 Type: Package
 Title: A Generalized Approach to Power Analysis for Local Average Treatment Effects
 Version: 0.1.0
-Author: Kirk Bansak <kbansak@ucsd.edu>, Eddie Yang <z5yang@ucsd.edu>
-Maintainer: Kirk Bansak <kbansak@ucsd.edu>, Eddie Yang <z5yang@ucsd.edu>
-Description: A generalized approach power analysis in the context of estimating a local average treatment effect (LATE), where the study subjects exhibit noncompliance with treatment assignment. The package uses standardized effect sizes to place bounds on the power for the most commonly used estimator of the LATE, the Wald IV estimator, whereby variance terms and distributional parameters need not be specified nor assumed. Instead, in addition to the effect size, sample size, and error tolerance parameters, the only other parameter that must be specified by the researcher is the compliance rate. Additional conditions can also be introduced to further narrow the bounds on the power calculation.
+Authors@R: c(
+  person("Kirk", "Bansak", , "kbansak@ucsd.edu", c("aut")),
+  person("Eddie", "Yang", , "z5yang@ucsd.edu", c("aut", "cre"))
+  )
+Maintainer: Eddie Yang <z5yang@ucsd.edu>
+Description: powerLATE implements the generalized power analysis for the LATE proposed by Bansak (2020) <doi:10.1214/19-STS732>. Power analysis is in the context of estimating a local average treatment effect (LATE), where the study subjects exhibit noncompliance with treatment assignment. The package uses standardized effect sizes to place bounds on the power for the most commonly used estimator of the LATE, the Wald IV estimator, whereby variance terms and distributional parameters need not be specified nor assumed. Instead, in addition to the effect size, sample size, and error tolerance parameters, the only other parameter that must be specified by the researcher is the compliance rate. Additional conditions can also be introduced to further narrow the bounds on the power calculation.
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true

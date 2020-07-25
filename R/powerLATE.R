@@ -78,13 +78,14 @@ powerLATE <- function(
 
 	# checks
 	if (missing(pi)) stop("pi (compliance rate) needs to be specified")
-	if (pZ <= 0 | pZ >= 1) stop("pZ (assignemnt probability) needs to be (0, 1]")
+	if (pZ <= 0 | pZ >= 1) stop("pZ (assignemnt probability) needs to be (0, 1)")
 	if (any(pi <= 0 | pi > 1)) stop("pi (compliance rate) needs to be (0, 1]")
-	if (sig.level <= 0 | sig.level >= 1) stop("sig.level needs to be between (0, 1]")
+	if (sig.level <= 0 | sig.level >= 1) stop("sig.level needs to be between (0, 1)")
 	if (!missing(power) && any(power <= 0 | power > 1)) stop("power needs to be between (0, 1]")
 	if (!missing(power) && any(power < 0.5)) stop("Supplied power is lower than 0.5. Results will be unreliable")
 	if (!missing(kappa) && any(kappa<=0)) stop("kappa needs to be positive")
 	if (!is.null(tau) && any(tau<=0)) stop("tau needs to be positive")
+	if (!is.null(omega) && any(omega<=0)) stop("omega needs to be positive")
 	if (!missing(N) && any(N<=0)) stop("N needs to be positive")
 	if (!missing(kappa) && !is.null(tau)) stop("kappa and tau cannot be both supplied")
 	if (effect.size && !is.null(tau)) stop("tau is supplied instead of kappa while effect.size = FALSE. User should set effect.size = TRUE in order to work with tau in place of kappa")
@@ -196,7 +197,7 @@ powerLATE <- function(
 			warning("Some of the returned values are invalid, indicating that results are not feasible for those parameters, coercing into NAs")
 		}	
 	}
-	
+
 	if (!effect.size && target==1){
 		out <- out*omega
 		output.name[1]  <- "tau"
