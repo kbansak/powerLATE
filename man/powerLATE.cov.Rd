@@ -5,42 +5,64 @@
 \title{A Generalized Approach to Power Analysis for Local Average Treatment Effects (with covariates)}
 \usage{
 powerLATE.cov(pZ = 0.5, pi, N, kappa,
-	tau = NULL, sig.level = 0.05, power,
-	effect.size = TRUE, omega = NULL, assume.ord.means = FALSE, r2dw, r2yw)
+	sig.level = 0.05, power,
+	effect.size = TRUE, tau = NULL, omega = NULL,
+	assume.ord.means = FALSE, r2dw, r2yw)
 }
 \arguments{
 \item{pZ}{probability of being assigned to treatment. Default is 0.5, i.e. equal assignment probability.}
 
-\item{pi}{compliance rate. Equivalently, average causal effect of Z on D.}
+\item{pi}{compliance rate. Equivalently, average causal effect of treatment assignment on treatment uptake.}
 
-\item{N}{total number of observations}
+\item{N}{total sample size.}
 
-\item{kappa}{effect size}
+\item{kappa}{effect size.}
 
-\item{tau}{absolute effect. Must be supplied if effect.size==FALSE.}
+\item{tau}{absolute effect. Must only be supplied if \code{effect.size = FALSE}.}
 
 \item{sig.level}{significance level (Type I error probability). Default is 0.05.}
 
-\item{power}{power of test (1 minus Type II error probability)}
+\item{power}{power of test (1 minus Type II error probability).}
 
-\item{effect.size}{whether effect size rather than tau is used in subsequent calculations. Default is TRUE.}
+\item{effect.size}{whether effect size (kappa) rather than absolute effect (tau) is used in power calculations. Default is \code{TRUE}.}
 
-\item{omega}{pooled standard deviation. Must be supplied if effect.size==FALSE.}
+\item{omega}{within-group standard deviation of the outcome. Must be supplied if \code{effect.size = FALSE}. See Details.}
 
-\item{assume.ord.means}{whether ordered mean assumption should be made. Default is FALSE}
+\item{assume.ord.means}{whether ordered means assumption is made. Default is \code{FALSE}. See Details.}
 
 \item{r2dw}{proportion of variation in D left unexplained by Z that is explained by W.}
 
 \item{r2yw}{proportion of variation in Y left unexplained by Z that is explained by W.}
 }
 \value{
-A dataframe with lower bounds on the target parameter, along with supplied parameter values. If one of \{kappa, N, power, pi, tau\} is passed as a vector of values, a dataframe with no. of rows = length of the vector will be returned.
+A list that includes the values of the input parameters supplied by the user (\code{input.parameter}) and the corresponding output value(s) 
+of the target parameter (\code{output.parameter}).
+
+Note also that the results along with additional information will be displayed in the console.
 }
 \description{
-Main function to perform generalized power analysis for LATE with covariates
+Function to perform generalized power analysis for the LATE (i.e. under noncompliance with treatment assignment), 
+allowing for covariate adjustment. Function allows for user to work with either standardized effect sizes or absolute effects. 
+The results provided presume a test of the null hypothesis that the LATE equals 0 with a two-sided alternative.
 }
 \details{
-Exactly two of the parameters \{kappa, N, power\} must be supplied, from which the third (target) parameter will be calculated. If effect.size==FALSE, exactly two of the parameters \{tau, N, power\} must be supplied.
+If \code{effect.size = TRUE} (the default setting), exactly two of the parameters \{\code{kappa, N, power}\} must be supplied, 
+from which the third (target) parameter will be calculated. If \code{effect.size = FALSE}, \code{omega} must be supplied, and exactly two of 
+the parameters \{\code{tau, N, power}\} must be supplied. \code{pi} must always be supplied, and the user can change \code{pZ} and \code{sig.level} 
+from their default values.
+
+Values between 0 and 1 must also be supplied for r2dw and r2yw. See "Power with Covariates) section in Bansak (2020) for more information and guidance.
+
+The user may also supply one of \{\code{kappa, N, power, pi, tau, r2dw, r2yw}\} as a vector of values to perform multiple power calculations at a time, 
+in which case the target parameter will be calculated for that entire vector.
+
+If \code{effect.size = FALSE}, \code{omega} represents the reference within-assignment-group standard deviation of the outcome. The user may wish to 
+use an estimate of the standard deviation of the outcome prior to the intervention (i.e. in the absence of the treatment). 
+See "Discussion on Effect Sizes" section in Bansak (2020) for more information and guidance.
+
+The \code{assume.ord.means} argument allows the user to choose whether or not to make the ordered means assumption, presented and described in Bansak (2020). 
+Users should only make this assumption (i.e. set \code{assume.ord.means = TRUE}) if they are reasonably confident that it will be met in their context of interest. 
+See "Narrowing the Bounds" section in Bansak (2020) for more information and guidance.
 }
 \examples{
 
@@ -70,5 +92,5 @@ res$output.parameter
 Bansak, K. (2020). A Generalized Approach to Power Analysis for Local Average Treatment Effects. Statistical Science, 35(2), 254-271.
 }
 \author{
-Kirk Bansak
+Kirk Bansak and Eddie Yang
 }

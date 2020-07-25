@@ -12,11 +12,12 @@
 #' @importFrom stats pnorm qnorm
 #' @references Bansak, K. (2020). A Generalized Approach to Power Analysis for Local Average Treatment Effects. Statistical Science, 35(2), 254-271.
 
-equal.ordered <- function(power = NULL,
-						  sig.level = NULL,
-						  pi = NULL,
-						  kappa = NULL,
-						  N = NULL){
+equal.ordered <- function(
+	power = NULL,
+	sig.level = NULL,
+	pi = NULL,
+	kappa = NULL,
+	N = NULL){
 
 	# mdes
 	if (!is.null(power) && !is.null(N)){
@@ -30,7 +31,7 @@ equal.ordered <- function(power = NULL,
 	if (!is.null(power) && !is.null(kappa)){
 		beta <- 1 - power
 		M <- qnorm(1-(sig.level/2)) + qnorm(1-beta)
-		upper.N <- (4*M^2*(1+kappa*sqrt((0.5-(pi/2))*(0.5+(pi/2))))^2)/(kappa^2*pi^2)
+		upper.N <- (4*M^2*(1+kappa^2*(0.5-(pi/2))*(0.5+(pi/2))))/(kappa^2*pi^2)
 		return(upper.N)
 	}
 

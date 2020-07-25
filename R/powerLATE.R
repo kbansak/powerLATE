@@ -1,23 +1,45 @@
 #' @title A Generalized Approach to Power Analysis for Local Average Treatment Effects
 #' @aliases powerLATE
-#' @description Main function to perform generalized power analysis for LATE
-#' @usage powerLATE(pZ = 0.5, pi, N, kappa, 
-#' 	tau = NULL, sig.level = 0.05, power, 
-#' 	effect.size = TRUE, omega = NULL, assume.ord.means = FALSE)
+#' @description Function to perform generalized power analysis for the LATE (i.e. under noncompliance with treatment assignment). 
+#' Function allows for user to work with either standardized effect sizes or absolute effects. 
+#' The results provided presume a test of the null hypothesis that the LATE equals 0 with a two-sided alternative.
+#' @usage powerLATE(pZ = 0.5, pi, N, kappa,
+#' 	sig.level = 0.05, power,
+#' 	effect.size = TRUE, tau = NULL, omega = NULL,
+#' 	assume.ord.means = FALSE)
 #' @param pZ            	probability of being assigned to treatment. Default is 0.5, i.e. equal assignment probability.
-#' @param pi            	compliance rate. Equivalently, average causal effect of Z on D.
-#' @param N             	total number of observations
-#' @param kappa         	effect size
-#' @param tau           	absolute effect. Must be supplied if effect.size==FALSE.
+#' @param pi            	compliance rate. Equivalently, average causal effect of treatment assignment on treatment uptake.
+#' @param N             	total sample size.
+#' @param kappa         	effect size.
 #' @param sig.level     	significance level (Type I error probability). Default is 0.05.
-#' @param power         	power of test (1 minus Type II error probability)
-#' @param effect.size   	whether effect size rather than tau is used in subsequent calculations. Default is TRUE.
-#' @param omega             pooled standard deviation. Must be supplied if effect.size==FALSE.
-#' @param assume.ord.means	whether ordered mean assumption should be made. Default is FALSE
-#' @details Exactly two of the parameters \{kappa, N, power\} must be supplied, from which the third (target) parameter will be calculated. If effect.size==FALSE, exactly two of the parameters \{tau, N, power\} must be supplied.
-#' @return A dataframe with lower bounds on the target parameter, along with supplied parameter values. If one of \{kappa, N, power, pi, tau\} is passed as a vector of values, a dataframe with no. of rows = length of the vector will be returned.
-#' @author Kirk Bansak
+#' @param power         	power of test (1 minus Type II error probability).
+#' @param effect.size   	whether effect size (kappa) rather than absolute effect (tau) is used in power calculations. Default is \code{TRUE}.
+#' @param tau           	absolute effect. Must only be supplied if \code{effect.size = FALSE}.
+#' @param omega				within-group standard deviation of the outcome. Must be supplied if \code{effect.size = FALSE}. See Details.
+#' @param assume.ord.means	whether ordered means assumption is made. Default is \code{FALSE}. See Details.
+#' @details If \code{effect.size = TRUE} (the default setting), exactly two of the parameters \{\code{kappa, N, power}\} must be supplied, 
+#' from which the third (target) parameter will be calculated. If \code{effect.size = FALSE}, \code{omega} must be supplied, and exactly two of 
+#' the parameters \{\code{tau, N, power}\} must be supplied. \code{pi} must always be supplied, and the user can change \code{pZ} and \code{sig.level} 
+#' from their default values.
+#' 
+#' The user may also supply one of \{\code{kappa, N, power, pi, tau}\} as a vector of values to perform multiple power calculations at a time, 
+#' in which case the target parameter will be calculated for that entire vector.
+#' 
+#' If \code{effect.size = FALSE}, \code{omega} represents the reference within-assignment-group standard deviation of the outcome. The user may wish to 
+#' use an estimate of the standard deviation of the outcome prior to the intervention (i.e. in the absence of the treatment). 
+#' See "Discussion on Effect Sizes" section in Bansak (2020) for more information and guidance.
+#' 
+#' The \code{assume.ord.means} argument allows the user to choose whether or not to make the ordered means assumption, presented and described in Bansak (2020). 
+#' Users should only make this assumption (i.e. set \code{assume.ord.means = TRUE}) if they are reasonably confident that it will be met in their context of interest. 
+#' See "Narrowing the Bounds" section in Bansak (2020) for more information and guidance.
+#' 
+#' @return A list that includes the values of the input parameters supplied by the user (\code{input.parameter}) and the corresponding output value(s) 
+#' of the target parameter (\code{output.parameter}).
+#' 
+#' Note also that the results along with additional information will be displayed in the console.
+#' @author Kirk Bansak and Eddie Yang
 #' @references Bansak, K. (2020). A Generalized Approach to Power Analysis for Local Average Treatment Effects. Statistical Science, 35(2), 254-271.
+#' @export
 #' @examples
 #' 
 #' #######################################################
@@ -42,36 +64,40 @@
 #' res$output.parameter
 #' @export
 
-powerLATE <- function(pZ = 0.5,
-					 pi,
-					 N,
-					 kappa,
-					 tau = NULL,
-					 sig.level = 0.05,
-					 power,
-					 effect.size = TRUE,
-					 omega = NULL,
-					 assume.ord.means = FALSE){
+powerLATE <- function(
+	pZ = 0.5,
+	pi,
+	N,
+	kappa,
+	sig.level = 0.05,
+	power,
+	effect.size = TRUE,
+	tau = NULL,
+	omega = NULL,
+	assume.ord.means = FALSE){
+
 	# checks
 	if (missing(pi)) stop("pi (compliance rate) needs to be specified")
-	if (pZ < 0 | pZ > 1) stop("pZ (assignemnt probability) needs to be between 0 and 1")
-	if (any(pi < 0 | pi > 1)) stop("pi (compliance rate) needs to be between 0 and 1")
-	if (sig.level < 0 | sig.level > 1) stop("sig.level needs to be between 0 and 1")
-	if (!missing(power) && any(power < 0 | power > 1)) stop("power needs to be between 0 and 1")
-	if (!missing(power) && any(power < 0.5)) stop("Supplied power is lower than 0.5. Results will be unrelliable")
-	if (!missing(kappa) && any(kappa<0)) stop("kappa needs to be positive")
-	if (!is.null(tau) && any(tau<0)) stop("tau needs to be positive")
-	if (!missing(N) && any(N<0)) stop("N needs to be positive")
+	if (pZ <= 0 | pZ >= 1) stop("pZ (assignemnt probability) needs to be (0, 1]")
+	if (any(pi <= 0 | pi > 1)) stop("pi (compliance rate) needs to be (0, 1]")
+	if (sig.level <= 0 | sig.level >= 1) stop("sig.level needs to be between (0, 1]")
+	if (!missing(power) && any(power <= 0 | power > 1)) stop("power needs to be between (0, 1]")
+	if (!missing(power) && any(power < 0.5)) stop("Supplied power is lower than 0.5. Results will be unreliable")
+	if (!missing(kappa) && any(kappa<=0)) stop("kappa needs to be positive")
+	if (!is.null(tau) && any(tau<=0)) stop("tau needs to be positive")
+	if (!missing(N) && any(N<=0)) stop("N needs to be positive")
 	if (!missing(kappa) && !is.null(tau)) stop("kappa and tau cannot be both supplied")
-	if (!effect.size && is.null(omega)) stop("omega must be supplied when effect.size==FALSE")
+	if (effect.size && !is.null(tau)) stop("tau is supplied instead of kappa while effect.size = FALSE. User should set effect.size = TRUE in order to work with tau in place of kappa")
+	if (effect.size && !is.null(omega)) stop("omega is supplied while effect.size = TRUE.")
+	if (!effect.size && is.null(omega)) stop("omega must be supplied when effect.size=FALSE")
 	if (effect.size && sum(missing(kappa), missing(N), missing(power))!=1){
 		stop("two of args {kappa, N, power} need to be specified")
 	}
 	if (!effect.size && sum(missing(tau), missing(N), missing(power))!=1){
 		stop("two of args {N, power, tau} need to be specified")
 	}
-	if (effect.size && !is.null(tau)) warning("tau is supplied while effect.size==TRUE. tau will be ignored")
-	if (effect.size && !is.null(omega)) warning("omega is supplied while effect.size==TRUE. omega will be ignored")
+	#if (effect.size && !is.null(tau)) warning("tau is supplied while effect.size=TRUE. tau will be ignored")
+	#if (effect.size && !is.null(omega)) warning("omega is supplied while effect.size=TRUE. omega will be ignored")
 
 	# set up elements
 	if (!effect.size && !is.null(tau)){
@@ -93,37 +119,41 @@ powerLATE <- function(pZ = 0.5,
 
 	# main
 	if (pZ==0.5 && !assume.ord.means){
-		out <- equal.unordered(pi = pi,
-							   power = power,
-							   N = N,
-							   kappa = kappa,
-							   sig.level = sig.level)
+		out <- equal.unordered(
+			pi = pi,
+			power = power,
+			N = N,
+			kappa = kappa,
+			sig.level = sig.level)
 	}
 
 	if (pZ==0.5 && assume.ord.means){
-		out <- equal.ordered(pi = pi,
-							 power = power,
-							 N = N,
-							 kappa = kappa,
-							 sig.level = sig.level)
+		out <- equal.ordered(
+			pi = pi,
+			power = power,
+			N = N,
+			kappa = kappa,
+			sig.level = sig.level)
 	}
 
 	if (pZ!=0.5 && !assume.ord.means){
-		out <- unequal.unordered(pZ = pZ,
-								 pi = pi,
-								 power = power,
-								 N = N,
-								 kappa = kappa,
-								 sig.level = sig.level)
+		out <- unequal.unordered(
+			pZ = pZ,
+			pi = pi,
+			power = power,
+			N = N,
+			kappa = kappa,
+			sig.level = sig.level)
 	}
 
 	if (pZ!=0.5 && assume.ord.means){
-		out <- unequal.ordered(pZ = pZ,
-							   pi = pi,
-							   power = power,
-							   N = N,
-							   kappa = kappa,
-							   sig.level = sig.level)
+		out <- unequal.ordered(
+			pZ = pZ,
+			pi = pi,
+			power = power,
+			N = N,
+			kappa = kappa,
+			sig.level = sig.level)
 	}
 
 	#names <- c("Compliance Rate", "Effect Size", "N", "Power")
@@ -156,17 +186,17 @@ powerLATE <- function(pZ = 0.5,
 	output.name <- c(c("kappa", "N", "power")[target], paste0("User-inputted ", multiple.input))
 
 	if (length(out)==1 && any(out<0, !is.finite(out))){
-		stop("The returned value is infinite or negative. Experiment may not be feasible with given parameters")
+		stop("The returned value is invalid. Results are not feasible with given parameters. You must increase the values of pi and/or N")
 	}
 	if (length(out)>1 && any(out<0, !is.finite(out))){
 		if (sum(out<0, !is.finite(out))==length(out)){
-			stop("The returned values are infinite or negative. Experiment may not be feasible with given parameters")
+			stop("The returned values are invalid. Results are not feasible with given parameters. You must increase the values of pi and/or N")
 		}else{
 			out[c(which(out<0), which(!is.finite(out)))] <- NA
-			warning("Some of the returned values are infinite or negative, coercing into NAs")
-		}
-		
+			warning("Some of the returned values are invalid, indicating that results are not feasible for those parameters, coercing into NAs")
+		}	
 	}
+	
 	if (!effect.size && target==1){
 		out <- out*omega
 		output.name[1]  <- "tau"

@@ -14,13 +14,14 @@
 #' @importFrom stats pnorm qnorm
 #' @references Bansak, K. (2020). A Generalized Approach to Power Analysis for Local Average Treatment Effects. Statistical Science, 35(2), 254-271.
 
-equal.unordered.cov <- function(power = NULL,
-								sig.level = NULL,
-								pi = NULL,
-								kappa = NULL,
-								N = NULL,
-								r2dw = NULL,
-								r2yw = NULL){
+equal.unordered.cov <- function(
+	power = NULL,
+	sig.level = NULL,
+	pi = NULL,
+	kappa = NULL,
+	N = NULL,
+	r2dw = NULL,
+	r2yw = NULL){
 
 	G <- (0.5-(pi/2))*(0.5+(pi/2))
 	S <- 1-r2yw^2
