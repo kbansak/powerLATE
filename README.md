@@ -83,11 +83,11 @@ res <- powerLATE(pZ = 0.5, pi = 0.35, N = 800, kappa = 0.8)
 #> NOTE: The Ordered-Means assumption is not being employed. If the user would like to make this assumption to narrow the bounds, set the argument assume.ord.means to TRUE.
 ```
 
-In general, two parameters from the set {effect size (`effect.size`),
-sample size (`N`), power (`power`)} must be specified, from which the
-third (target) parameter will be calculated. For example, if we are
-interested in the lower bound on the required sample size for a level of
-power of 0.8 to reject the null hypothesis, we can run the following:
+In general, two parameters from the set {effect size (`kappa`), sample
+size (`N`), power (`power`)} must be specified, from which the third
+(target) parameter will be calculated. For example, if we are interested
+in the lower bound on the required sample size for a level of power of
+0.8 to reject the null hypothesis, we can run the following:
 
 ``` r
 res <- powerLATE(pZ = 0.5, pi = 0.35, kappa = 0.8, power = 0.8)
