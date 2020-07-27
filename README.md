@@ -67,7 +67,7 @@ compute the power of this experiment by the following:
 
 ``` r
 library(powerLATE)
-res <- powerLATE(pZ = 0.5, N = 800, pi = 0.35, kappa =0.8)
+res <- powerLATE(pZ = 0.5, pi = 0.35, N = 800, kappa = 0.8)
 #> Power analysis for two-sided test that LATE equals zero
 #> 
 #>  pZ = 0.5
@@ -83,12 +83,35 @@ res <- powerLATE(pZ = 0.5, N = 800, pi = 0.35, kappa =0.8)
 #> NOTE: The Ordered-Means assumption is not being employed. If the user would like to make this assumption to narrow the bounds, set the argument assume.ord.means to TRUE.
 ```
 
-If absolute effect is desired instead of effect size, simply set
-`effect.size=FALSE` and supply `omega`, the pooled standard deviation
-across treatment groups, and `tau`, the absolute effect.
+In general, two parameters from the set {effect size (`effect.size`),
+sample size (`N`), power (`power`)} must be specified, from which the
+third (target) parameter will be calculated. For example, if we are
+interested in the lower bound on the required sample size for a level of
+power of 0.8 to reject the null hypothesis, we can run the following:
 
 ``` r
-res <- powerLATE(pZ=0.5, N=800, pi=0.35, omega = 0.6, tau = 0.4, effect.size = FALSE)
+res <- powerLATE(pZ = 0.5, pi = 0.35, kappa = 0.8, power = 0.8)
+#> Power analysis for two-sided test that LATE equals zero
+#> 
+#>  pZ = 0.5
+#>  pi = 0.35
+#>  kappa = 0.8
+#>  Power = 0.8
+#>  sig.level  = 0.05
+#> 
+#> Given these parameter values, the conservative bound for N (required sample size):
+#>        N 
+#> 756.7761 
+#> 
+#> NOTE: The Ordered-Means assumption is not being employed. If the user would like to make this assumption to narrow the bounds, set the argument assume.ord.means to TRUE.
+```
+
+If absolute effect is desired instead of effect size, simply set
+`effect.size=FALSE` and specify `tau`, the hypothesized absolute effect,
+and `omega`, the within-group standard deviation of the outcome.
+
+``` r
+res <- powerLATE(pZ = 0.5, pi = 0.35, N = 800, effect.size = FALSE, tau = 0.4, omega = 0.6,)
 #> Power analysis for two-sided test that LATE equals zero
 #> 
 #>  pZ = 0.5
@@ -106,10 +129,10 @@ res <- powerLATE(pZ=0.5, N=800, pi=0.35, omega = 0.6, tau = 0.4, effect.size = F
 ```
 
 We can also input a vector of values for any one parameter in the set
-{N, kappa, power, pi, tau, omega}.
+{pi, N, kappa, power, tau, omega}.
 
 ``` r
-res <- powerLATE(pZ = 0.5, N = 800, pi = 0.35, kappa = seq(0.5, 1.0, 0.1))
+res <- powerLATE(pZ = 0.5, pi = 0.35, N = 800, kappa = seq(0.5, 1.0, 0.1))
 #> Power analysis for two-sided test that LATE equals zero
 #> 
 #>  pZ = 0.5
@@ -130,10 +153,10 @@ res <- powerLATE(pZ = 0.5, N = 800, pi = 0.35, kappa = seq(0.5, 1.0, 0.1))
 #> NOTE: The Ordered-Means assumption is not being employed. If the user would like to make this assumption to narrow the bounds, set the argument assume.ord.means to TRUE.
 ```
 
-With covariates,
+With covariates, use `powerLATE.cov` and specify `r2dw` and `r2yw`.
 
 ``` r
-res <- powerLATE.cov(pZ = 0.5, N = 800, pi = 0.35, kappa = seq(0.5, 1.0, 0.1), r2dw = 0.2, r2yw = 0.3)
+res <- powerLATE.cov(pZ = 0.5, pi = 0.35, N = 800, kappa = seq(0.5, 1.0, 0.1), r2dw = 0.2, r2yw = 0.3)
 #> Power analysis for two-sided test that LATE equals zero
 #> 
 #>  pZ = 0.5
@@ -161,28 +184,9 @@ In addition to the message that is automatically printed out,
 as an invisible object, simply query
 
 ``` r
-res <- powerLATE(pZ = 0.5, N = 800, pi = 0.35, kappa = seq(0.5, 1.0, 0.1))
-#> Power analysis for two-sided test that LATE equals zero
-#> 
-#>  pZ = 0.5
-#>  pi = 0.35
-#>  N = 800
-#>  kappa = Multiple values inputted (see table below)
-#>  sig.level  = 0.05
-#> 
-#> Given these parameter values, the conservative bound for Power:
-#>   power     User-inputted kappa
-#> 1 0.5181033 0.5                
-#> 2 0.6399776 0.6                
-#> 3 0.7419496 0.7                
-#> 4 0.8213495 0.8                
-#> 5 0.8797640 0.9                
-#> 6 0.9208686 1.0                
-#> 
-#> NOTE: The Ordered-Means assumption is not being employed. If the user would like to make this assumption to narrow the bounds, set the argument assume.ord.means to TRUE.
 res$output.parameter
-#>            [,1]      [,2]      [,3]      [,4]     [,5]      [,6]
-#> power 0.5181033 0.6399776 0.7419496 0.8213495 0.879764 0.9208686
+#>           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]
+#> power 0.552284 0.6757927 0.7755263 0.8502388 0.9030156 0.9386345
 ```
 
 ## Reference
