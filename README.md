@@ -13,19 +13,19 @@ status](https://ci.appveyor.com/api/projects/status/github/EddieYang211/powerLAT
 coverage](https://codecov.io/gh/EddieYang211/powerLATE/branch/master/graph/badge.svg)](https://codecov.io/gh/EddieYang211/powerLATE?branch=master)
 <!-- badges: end -->
 
-The goal of powerLATE is to provide a generalized approach to power
-analysis in the context of estimating a local average treatment effect
-(LATE), where the study subjects exhibit noncompliance with treatment
-assignment.
+powerLATE implements the generalized power analysis for the local
+average treatment effect (LATE), proposed by [Bansak
+(2020)](doi:10.1214/19-STS732).
 
-powerLATE uses standardized effect sizes to place bounds on the power
-for the most commonly used estimator of the LATE, the Wald IV estimator,
-whereby variance terms and distributional parameters need not be
-specified nor assumed. Instead, in addition to the effect size, sample
-size, and error tolerance parameters, the only other parameter that must
-be specified by the researcher is the compliance rate. Additional
-conditions can also be introduced to further narrow the bounds on the
-power calculation.
+Power analysis is in the context of estimating the LATE (also known as
+the complier average causal effect, or CACE), with calculations based on
+a test of the null hypothesis that the LATE equals 0 with a two-sided
+alternative. The method uses standardized effect sizes to place a
+conservative bound on the power under minimal assumptions. powerLATE
+allows users to recover power, sample size requirements, or minimum
+detectable effect sizes. It also allows users to work with absolute
+effects rather than effect sizes, to specify an additional assumption to
+narrow the bounds, and to incorporate covariate adjustment.
 
 ## Installation
 
@@ -76,7 +76,7 @@ res <- powerLATE(pZ = 0.5, pi = 0.35, N = 800, kappa = 0.8)
 #>  kappa = 0.8
 #>  sig.level  = 0.05
 #> 
-#> Given these parameter values, the conservative bound for Power:
+#> Given these parameter values, the conservative (lower) bound for Power:
 #>     power 
 #> 0.8213495 
 #> 
@@ -99,7 +99,7 @@ res <- powerLATE(pZ = 0.5, pi = 0.35, kappa = 0.8, power = 0.8)
 #>  Power = 0.8
 #>  sig.level  = 0.05
 #> 
-#> Given these parameter values, the conservative bound for N (required sample size):
+#> Given these parameter values, the conservative (upper) bound for N (required sample size):
 #>        N 
 #> 756.7761 
 #> 
@@ -121,7 +121,7 @@ res <- powerLATE(pZ = 0.5, pi = 0.35, N = 800, effect.size = FALSE, tau = 0.4, o
 #>  omega = 0.6
 #>  sig.level  = 0.05
 #> 
-#> Given these parameter values, the conservative bound for Power:
+#> Given these parameter values, the conservative (lower) bound for Power:
 #>     power 
 #> 0.7104445 
 #> 
@@ -141,7 +141,7 @@ res <- powerLATE(pZ = 0.5, pi = 0.35, N = 800, kappa = seq(0.5, 1.0, 0.1))
 #>  kappa = Multiple values inputted (see table below)
 #>  sig.level  = 0.05
 #> 
-#> Given these parameter values, the conservative bound for Power:
+#> Given these parameter values, the conservative (lower) bound for Power:
 #>   power     User-inputted kappa
 #> 1 0.5181033 0.5                
 #> 2 0.6399776 0.6                
@@ -167,7 +167,7 @@ res <- powerLATE.cov(pZ = 0.5, pi = 0.35, N = 800, kappa = seq(0.5, 1.0, 0.1), r
 #>  r2yw = 0.3
 #>  sig.level  = 0.05
 #> 
-#> Given these parameter values, the conservative bound for Power:
+#> Given these parameter values, the conservative (lower) bound for Power:
 #>   power     User-inputted kappa
 #> 1 0.5522840 0.5                
 #> 2 0.6757927 0.6                
@@ -188,6 +188,8 @@ res$output.parameter
 #>           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]
 #> power 0.552284 0.6757927 0.7755263 0.8502388 0.9030156 0.9386345
 ```
+
+For more details and examples, see `?powerLATE` and `?powerLATE.cov`
 
 ## Reference
 

@@ -21,9 +21,9 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/EddieYang211/powerLATE/branch/master/graph/badge.svg)](https://codecov.io/gh/EddieYang211/powerLATE?branch=master)
 <!-- badges: end -->
 
-The goal of powerLATE is to provide a generalized approach to power analysis in the context of estimating a local average treatment effect (LATE), where the study subjects exhibit noncompliance with treatment assignment. 
+powerLATE implements the generalized power analysis for the local average treatment effect (LATE), proposed by [Bansak (2020)](doi:10.1214/19-STS732).
 
-powerLATE uses standardized effect sizes to place bounds on the power for the most commonly used estimator of the LATE, the Wald IV estimator, whereby variance terms and distributional parameters need not be specified nor assumed. Instead, in addition to the effect size, sample size, and error tolerance parameters, the only other parameter that must be specified by the researcher is the compliance rate. Additional conditions can also be introduced to further narrow the bounds on the power calculation.
+Power analysis is in the context of estimating the LATE (also known as the complier average causal effect, or CACE), with calculations based on a test of the null hypothesis that the LATE equals 0 with a two-sided alternative. The method uses standardized effect sizes to place a conservative bound on the power under minimal assumptions. powerLATE allows users to recover power, sample size requirements, or minimum detectable effect sizes. It also allows users to work with absolute effects rather than effect sizes, to specify an additional assumption to narrow the bounds, and to incorporate covariate adjustment.
 
 ## Installation
 
@@ -89,6 +89,8 @@ In addition to the message that is automatically printed out, `powerLATE` and `p
 ```{r}
 res$output.parameter
 ```
+
+For more details and examples, see `?powerLATE` and `?powerLATE.cov`
 
 ## Reference
 

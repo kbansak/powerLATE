@@ -39,7 +39,7 @@ unequal.unordered <- function(
 
 	# power
 	if (!is.null(N) && !is.null(kappa)){
-		c.val <- qnorm(1-(sig.level/2)) # 1-beta
+		c.val <- qnorm(1-(sig.level/2)) # 1-alpha/2
 		effect.bound <- (kappa*pi*sqrt(pZ*(1-pZ)*N))/(1+0.5*kappa)
 		power <- pnorm(-c.val + effect.bound) + pnorm(-c.val - effect.bound)
 		return(power)

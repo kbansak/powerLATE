@@ -37,7 +37,7 @@ equal.ordered <- function(
 
 	# power
 	if (!is.null(N) && !is.null(kappa)){
-		c.val <- qnorm(1-(sig.level/2)) # 1-beta
+		c.val <- qnorm(1-(sig.level/2)) # 1-alpha/2
 		effect.bound <- (0.5*kappa*pi*sqrt(N))/sqrt(1+kappa^2*(0.5-(pi/2))*(0.5+(pi/2)))
 		power <- pnorm(-c.val + effect.bound) + pnorm(-c.val - effect.bound)
 		return(power)

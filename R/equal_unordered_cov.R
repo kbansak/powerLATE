@@ -49,7 +49,7 @@ equal.unordered.cov <- function(
 
 	# power
 	if (!is.null(N) && !is.null(kappa)){
-		c.val <- qnorm(1-(sig.level/2)) # 1-beta
+		c.val <- qnorm(1-(sig.level/2)) # 1-alpha/2
 		effect.bound <- (0.5*kappa*pi*sqrt(N))/sqrt(S + kappa^2*T*G + 2*kappa*sqrt(S*T*G))
 		power <- pnorm(-c.val + effect.bound) + pnorm(-c.val - effect.bound)
 		return(power)
