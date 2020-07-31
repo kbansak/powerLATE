@@ -16,7 +16,7 @@ powerLATE(pZ = 0.5, pi, N, kappa,
 
 \item{N}{total sample size.}
 
-\item{kappa}{effect size.}
+\item{kappa}{LATE effect size (i.e. effect size for compliers).}
 
 \item{sig.level}{significance level (Type I error probability). Default is 0.05.}
 
@@ -24,7 +24,7 @@ powerLATE(pZ = 0.5, pi, N, kappa,
 
 \item{effect.size}{whether effect size (kappa) rather than absolute effect (tau) is used in power calculations. Default is \code{TRUE}.}
 
-\item{tau}{absolute effect. Must only be supplied if \code{effect.size = FALSE}.}
+\item{tau}{LATE absolute effect (i.e. absolute effect for compliers). Must only be supplied if \code{effect.size = FALSE}.}
 
 \item{omega}{within-group standard deviation of the outcome. Must be supplied if \code{effect.size = FALSE}. See Details.}
 
@@ -59,27 +59,55 @@ Users should only make this assumption (i.e. set \code{assume.ord.means = TRUE})
 See "Narrowing the Bounds" section in Bansak (2020) for more information and guidance.
 }
 \examples{
+#EXAMPLE 1
+#Recovering power, without ordered-means assumption
+#powerLATE(pi = 0.5, N = 3000, kappa = 0.25)
+results <- powerLATE(pi = 0.5, N = 3000, kappa = 0.25)
+results$input.parameter
+results$output.parameter
 
-#######################################################
-### Example 1: 
-### LATE w/ equal assigment w/o ordered mean assumption
-#######################################################
+#EXAMPLE 2
+#Recovering power for various compliance rates,
+#without ordered-means assumption, and with unequal treatment-assignment probability
+powerLATE(pZ = 0.25, pi = c(0.3,0.4,0.5,0.6,0.7), N = 3000, kappa = 0.25)
 
-res <- powerLATE(pZ=0.5, pi=0.35, kappa=seq(0.4, 1.0, 0.1), power=0.8)
+#EXAMPLE 3
+#Again recovering power for various compliance rates,
+#this time with the ordered-means assumption
+powerLATE(pi = c(0.3,0.4,0.5,0.6,0.7), N = 3000, kappa = 0.25,
+          assume.ord.means = TRUE)
 
-# also returns an invisible object: output.parameter
-res$output.parameter
+#EXAMPLE 4
+#Recovering power, without ordered-means assumption, 
+#this time using absolute effect rather than effect size
+powerLATE(pi = 0.5, N = 3000, 
+          effect.size = FALSE, tau = 300, omega = 1500)
 
-#######################################################
-### Example 2: 
-### LATE w/o equal assigment w/ ordered mean assumption
-#######################################################
+#EXAMPLE 5
+#Recovering required sample size for various compliance rates,
+#with ordered-means assumption
+powerLATE(pi = c(0.5,0.6,0.7,0.8), kappa = 0.25,
+          power = 0.8, assume.ord.means = TRUE)
 
-res <- powerLATE(pZ=0.67, pi=0.35, kappa=seq(0.4, 1.0, 0.1), 
-                power=0.8, assume.ord.means=TRUE)
+#EXAMPLE 6
+#Recovering required sample size for various compliance rates,
+#with ordered-means assumption, and specifying absolute effect
+powerLATE(pi = c(0.5,0.6,0.7,0.8),
+          power = 0.8, assume.ord.means = TRUE,
+          effect.size = FALSE, tau = 25, omega = 125)
 
-# also returns an invisible object: output.parameter
-res$output.parameter
+#EXAMPLE 7
+#Recovering minimum detectable effect size for various sample sizes,
+#without ordered-means assumption
+powerLATE(pi = 0.6, N = c(1000,1500,2000,2500,3000),
+          power = 0.8)
+
+#EXAMPLE 8
+#Recovering minimum detectable effect (absolute) for various sample sizes,
+#with ordered-means assumption, and with unequal treatment-assignment probability
+powerLATE(pZ = 0.4, pi = 0.6, N = c(1000,1500,2000,2500,3000),
+          power = 0.8, assume.ord.means = TRUE, 
+          effect.size = FALSE, omega = 50)
 }
 \references{
 Bansak, K. (2020). A Generalized Approach to Power Analysis for Local Average Treatment Effects. Statistical Science, 35(2), 254-271.
