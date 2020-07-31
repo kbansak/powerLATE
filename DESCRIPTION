@@ -12,7 +12,7 @@ License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0
-URL: https://github.com/EddieYang211/powerLATE
-BugReports: https://github.com/EddieYang211/powerLATE/issues
+URL: https://github.com/kbansak/powerLATE
+BugReports: https://github.com/kbansak/powerLATE/issues
 Suggests: 
     covr
