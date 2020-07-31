@@ -132,8 +132,6 @@ powerLATE.cov <- function(
 	if (!effect.size && sum(missing(tau), missing(N), missing(power))!=1){
 		stop("two of args {N, power, tau} need to be specified")
 	}
-	#if (effect.size && !is.null(tau)) warning("tau is supplied while effect.size==TRUE. tau will be ignored")
-	#if (effect.size && !is.null(omega)) warning("omega is supplied while effect.size==TRUE. omega will be ignored")
 	if (missing(r2dw)) stop("r2dw must be supplied")
 	if (missing(r2yw)) stop("r2yw must be supplied")
 	if (any(r2dw < 0) | any(r2dw >= 1)) stop("r2dw must be in the range [0, 1)")
@@ -206,8 +204,6 @@ powerLATE.cov <- function(
 			r2yw=r2yw)
 	}
 
-	#names <- c("Compliance Rate", "Effect Size", "N", "Power")
-
 	# output
 	if (is.null(kappa)){
 		target <- 1
@@ -275,9 +271,6 @@ powerLATE.cov <- function(
 		output <- res[output.name[1]]
 	}
 
-	#if (!all(apply(res, 2, is.finite))){
-	#	warning("Some returned values are not finite. Experiment may not be feasible with given parameters")
-	#}
 	print(res, right=F)
 
 	if (pZ == 0.5 && !assume.ord.means){
@@ -293,11 +286,6 @@ powerLATE.cov <- function(
 		cat("\nNOTE: The Ordered-Means assumption is being employed. User should confirm that the assumption is reasonable in the context of interest. The Homoskedasticity assumption is currently being made because pZ does not equal 0.5.", fill=TRUE)
 	}
 
-	#output.para.name <- colnames(res)[1]
-	#output.para <- structure(
-	#	list(output = output),
-	#	row.names = output.para.name,
-	#	class = "data.frame")
 	out <- list(input.parameter=input.para, output.parameter=output)
 	return(invisible(out))
 }
