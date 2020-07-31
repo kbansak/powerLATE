@@ -6,11 +6,11 @@
 <!-- badges: start -->
 
 [![Travis build
-status](https://travis-ci.com/EddieYang211/powerLATE.svg?branch=master)](https://travis-ci.com/EddieYang211/powerLATE)
+status](https://travis-ci.com/kbansak/powerLATE.svg?branch=master)](https://travis-ci.com/kbansak/powerLATE)
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/EddieYang211/powerLATE?branch=master&svg=true)](https://ci.appveyor.com/project/EddieYang211/powerLATE)
+status](https://ci.appveyor.com/api/projects/status/github/kbansak/powerLATE?branch=master&svg=true)](https://ci.appveyor.com/project/kbansak/powerLATE)
 [![Codecov test
-coverage](https://codecov.io/gh/EddieYang211/powerLATE/branch/master/graph/badge.svg)](https://codecov.io/gh/EddieYang211/powerLATE?branch=master)
+coverage](https://codecov.io/gh/kbansak/powerLATE/branch/master/graph/badge.svg)](https://codecov.io/gh/kbansak/powerLATE?branch=master)
 <!-- badges: end -->
 
 powerLATE implements the generalized power analysis for the local
