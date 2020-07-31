@@ -15,7 +15,7 @@ coverage](https://codecov.io/gh/EddieYang211/powerLATE/branch/master/graph/badge
 
 powerLATE implements the generalized power analysis for the local
 average treatment effect (LATE), proposed by [Bansak
-(2020)](doi:10.1214/19-STS732).
+(2020)](https://projecteuclid.org/download/pdfview_1/euclid.ss/1591171230).
 
 Power analysis is in the context of estimating the LATE (also known as
 the complier average causal effect, or CACE), with calculations based on
