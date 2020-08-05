@@ -2,12 +2,12 @@
 % Please edit documentation in R/powerLATE.R
 \name{powerLATE}
 \alias{powerLATE}
-\title{A Generalized Approach to Power Analysis for Local Average Treatment Effects}
+\title{Power Analysis for Local Average Treatment Effect}
 \usage{
 powerLATE(pZ = 0.5, pi, N, kappa,
 	sig.level = 0.05, power,
 	effect.size = TRUE, tau = NULL, omega = NULL,
-	assume.ord.means = FALSE)
+	assume.ord.means = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{pZ}{probability of being assigned to treatment. Default is 0.5, i.e. equal assignment probability.}
@@ -29,6 +29,8 @@ powerLATE(pZ = 0.5, pi, N, kappa,
 \item{omega}{within-group standard deviation of the outcome. Must be supplied if \code{effect.size = FALSE}. See Details.}
 
 \item{assume.ord.means}{whether ordered means assumption is made. Default is \code{FALSE}. See Details.}
+
+\item{verbose}{print input and output parameter values. Default is \code{TRUE}.}
 }
 \value{
 A list that includes the values of the input parameters supplied by the user (\code{input.parameter}) and the corresponding output value(s) 
