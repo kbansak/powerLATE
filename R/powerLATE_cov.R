@@ -228,27 +228,27 @@ powerLATE.cov <- function(
 	}
 
 	input <- list(main = paste0("Power analysis for two-sided test that LATE equals zero", "\n\n"),
-		pZ = paste0("pZ = ", as.character(checkVec(pZ)), "\n"),
-		pi = paste0("pi = ", as.character(checkVec(pi)), "\n"),
-		N = paste0("N = ", as.character(checkVec(N)), "\n"),
-		kappa = paste0("kappa = ", as.character(checkVec(kappa)), "\n"),
-		tau = paste0("tau = ", as.character(checkVec(tau)), "\n"),
-		omega = paste0("omega = ", as.character(checkVec(omega)), "\n"),
-		power = paste0("Power = ", as.character(checkVec(power)), "\n"),
-		r2dw = paste0("r2dw = ", as.character(checkVec(r2dw)), "\n"),
-		r2yw = paste0("r2yw = ", as.character(checkVec(r2yw)), "\n"),
-		sig.level = paste0("sig.level  = ", as.character(checkVec(sig.level)), "\n\n"))
+		pZ = paste0("pZ = ", checkVec(pZ), "\n"),
+		pi = paste0("pi = ", checkVec(pi), "\n"),
+		N = paste0("N = ", checkVec(N), "\n"),
+		kappa = paste0("kappa = ", checkVec(kappa), "\n"),
+		tau = paste0("tau = ", checkVec(tau), "\n"),
+		omega = paste0("omega = ", checkVec(omega), "\n"),
+		power = paste0("Power = ", checkVec(power), "\n"),
+		r2dw = paste0("r2dw = ", checkVec(r2dw), "\n"),
+		r2yw = paste0("r2yw = ", checkVec(r2yw), "\n"),
+		sig.level = paste0("sig.level  = ", checkVec(sig.level)))
 
 	if (!effect.size) input$kappa <- NULL
-	input <- input[!grepl(pattern = "= \n", x=unlist(input))]
+	input <- input[!grepl(pattern = "no inputted value", x=unlist(input))]
 	message.input <- (unlist(input))
 
 	multiple.input <- names(input[grepl(pattern = "= Multiple", x=unlist(input))])
 	output.name <- c(c("kappa", "N", "power")[target], paste0("User-inputted ", multiple.input))
 
-	message.target <- c("(upper) bound for kappa (minimum detectable effect size)", 
-		"(upper) bound for N (required sample size)", 
-		"(lower) bound for Power")
+	message.target <- c("(upper) bound for kappa (minimum detectable effect size):", 
+		"(upper) bound for N (required sample size):", 
+		"(lower) bound for Power:")
 
 	if (!effect.size && target==1){
 		out <- out*omega
@@ -256,7 +256,7 @@ powerLATE.cov <- function(
 		message.target[1] <- "(upper) bound for tau (minimum detectable effect)"
 	}
 
-	message.output <- (paste0("Given these parameter values, the conservative ", message.target[target], ":\n"))
+	message.output <- paste0("\n\nGiven these parameter values, the conservative ", message.target[target], "\n")
 
 	if(length(multiple.input)!=0){
 		res <- structure(list(
@@ -274,28 +274,28 @@ powerLATE.cov <- function(
 	}
 
 	if (pZ == 0.5 && !assume.ord.means && verbose){
-		note <- "NOTE: The Ordered-Means assumption is not being employed. If the user would like to make this assumption to narrow the bounds, set the argument assume.ord.means to TRUE."
+		note <- "The Ordered-Means assumption is not being employed. If the user would like to make this assumption to narrow the bounds, set the argument assume.ord.means to TRUE."
 		cat(message.input, message.output)
-		print(res, right=F, row.names = FALSE)
-		cat(note)
+		print(res, right=F)
+		cat("\nNOTE: ", note, "\n")
 	} 
 	if (pZ == 0.5 && assume.ord.means && verbose){
-		note <- "\nNOTE: The Ordered-Means assumption is being employed. User should confirm that the assumption is reasonable in the context of interest."
+		note <- "The Ordered-Means assumption is being employed. User should confirm that the assumption is reasonable in the context of interest."
 		cat(message.input, message.output)
-		print(res, right=F, row.names = FALSE)
-		cat(note)
+		print(res, right=F)
+		cat("\nNOTE: ", note, "\n")
 	} 
 	if (pZ != 0.5 && !assume.ord.means && verbose){
-		note <- "\nNOTE: The Ordered-Means assumption is not being employed. If the user would like to make this assumption to narrow the bounds, set the argument assume.ord.means to TRUE. The Homoskedasticity assumption is currently being made because pZ does not equal 0.5."
+		note <- "The Ordered-Means assumption is not being employed. If the user would like to make this assumption to narrow the bounds, set the argument assume.ord.means to TRUE. The Homoskedasticity assumption is currently being made because pZ does not equal 0.5."
 		cat(message.input, message.output)
-		print(res, right=F, row.names = FALSE)
-		cat(note)
+		print(res, right=F)
+		cat("\nNOTE: ", note, "\n")
 	} 
 	if (pZ != 0.5 && assume.ord.means && verbose){
-		note <- "\nNOTE: The Ordered-Means assumption is being employed. User should confirm that the assumption is reasonable in the context of interest. The Homoskedasticity assumption is currently being made because pZ does not equal 0.5."
+		note <- "The Ordered-Means assumption is being employed. User should confirm that the assumption is reasonable in the context of interest. The Homoskedasticity assumption is currently being made because pZ does not equal 0.5."
 		cat(message.input, message.output)
-		print(res, right=F, row.names = FALSE)
-		cat(note)
+		print(res, right=F)
+		cat("\nNOTE: ", note, "\n")
 	} 
 
 	out <- list(input.parameter=input.para, output.parameter=output)
