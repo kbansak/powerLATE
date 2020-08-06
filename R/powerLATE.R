@@ -219,7 +219,6 @@ powerLATE <- function(
 	if (!effect.size) input$kappa <- NULL
 	input <- input[!grepl(pattern = "no inputted value", x=unlist(input))]
 	message.input <- (unlist(input))
-	
 	multiple.input <- names(input[grepl(pattern = "= Multiple", x=unlist(input))])
 	output.name <- c(c("kappa", "N", "power")[target], paste0("User-inputted ", multiple.input))
 
@@ -230,7 +229,7 @@ powerLATE <- function(
 	if (!effect.size && target==1){
 		out <- out*omega
 		output.name[1]  <- "tau"
-		message.target[1] <- "(upper) bound for tau (minimum detectable effect)"
+		message.target[1] <- "(upper) bound for tau (minimum detectable effect):"
 	}
 	
 	message.output <- (paste0("\n\nGiven these parameter values, the conservative ", message.target[target], "\n"))
