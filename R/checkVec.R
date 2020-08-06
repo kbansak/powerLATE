@@ -6,7 +6,9 @@
 #' @author Kirk Bansak
 
 checkVec <- function(val){
-	if (length(val)>1){
+	if (length(val) == 0){
+		return("no inputted value")
+	}else if (length(val)>1){
 		return("Multiple values inputted (see table below)")
 	}else {
 		return(val)

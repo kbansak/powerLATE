@@ -2,12 +2,12 @@
 % Please edit documentation in R/powerLATE_cov.R
 \name{powerLATE.cov}
 \alias{powerLATE.cov}
-\title{A Generalized Approach to Power Analysis for Local Average Treatment Effects (with covariates)}
+\title{Power Analysis for Local Average Treatment Effect w/ covariates}
 \usage{
 powerLATE.cov(pZ = 0.5, pi, N, kappa,
 	sig.level = 0.05, power,
 	effect.size = TRUE, tau = NULL, omega = NULL,
-	assume.ord.means = FALSE, r2dw, r2yw)
+	assume.ord.means = FALSE, r2dw, r2yw, verbose = TRUE)
 }
 \arguments{
 \item{pZ}{probability of being assigned to treatment. Default is 0.5, i.e. equal assignment probability.}
@@ -33,6 +33,8 @@ powerLATE.cov(pZ = 0.5, pi, N, kappa,
 \item{r2dw}{proportion of variation in D left unexplained by Z that is explained by W.}
 
 \item{r2yw}{proportion of variation in Y left unexplained by Z that is explained by W.}
+
+\item{verbose}{print input and output parameter values. Default is \code{TRUE}.}
 }
 \value{
 A list that includes the values of the input parameters supplied by the user (\code{input.parameter}) and the corresponding output value(s) 

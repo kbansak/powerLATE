@@ -1,4 +1,4 @@
-#' @title A Generalized Approach to Power Analysis for Local Average Treatment Effects
+#' @title Power Analysis for Local Average Treatment Effect
 #' @aliases powerLATE
 #' @description Function to perform generalized power analysis for the LATE (i.e. under noncompliance with treatment assignment). 
 #' Function allows for user to work with either standardized effect sizes or absolute effects. 
@@ -6,7 +6,7 @@
 #' @usage powerLATE(pZ = 0.5, pi, N, kappa,
 #' 	sig.level = 0.05, power,
 #' 	effect.size = TRUE, tau = NULL, omega = NULL,
-#' 	assume.ord.means = FALSE)
+#' 	assume.ord.means = FALSE, verbose = TRUE)
 #' @param pZ            	probability of being assigned to treatment. Default is 0.5, i.e. equal assignment probability.
 #' @param pi            	compliance rate. Equivalently, average causal effect of treatment assignment on treatment uptake.
 #' @param N             	total sample size.
@@ -17,6 +17,7 @@
 #' @param tau           	LATE absolute effect (i.e. absolute effect for compliers). Must only be supplied if \code{effect.size = FALSE}.
 #' @param omega				within-group standard deviation of the outcome. Must be supplied if \code{effect.size = FALSE}. See Details.
 #' @param assume.ord.means	whether ordered means assumption is made. Default is \code{FALSE}. See Details.
+#' @param verbose           print input and output parameter values. Default is \code{TRUE}.
 #' @details If \code{effect.size = TRUE} (the default setting), exactly two of the parameters \{\code{kappa, N, power}\} must be supplied, 
 #' from which the third (target) parameter will be calculated. If \code{effect.size = FALSE}, \code{omega} must be supplied, and exactly two of 
 #' the parameters \{\code{tau, N, power}\} must be supplied. \code{pi} must always be supplied, and the user can change \code{pZ} and \code{sig.level} 
@@ -102,7 +103,8 @@ powerLATE <- function(
 	effect.size = TRUE,
 	tau = NULL,
 	omega = NULL,
-	assume.ord.means = FALSE){
+	assume.ord.means = FALSE,
+	verbose = TRUE){
 
 	# checks
 	if (missing(pi)) stop("pi (compliance rate) needs to be specified")
@@ -184,31 +186,6 @@ powerLATE <- function(
 	}
 
 	# output
-	if (is.null(kappa)){
-		target <- 1
-	}else if (is.null(N)){
-		target <- 2
-	}else if (is.null(power)){
-		target <- 3
-	}
-
-	input <- list(main = paste0("Power analysis for two-sided test that LATE equals zero", "\n\n"),
-		pZ = paste0("pZ = ", as.character(checkVec(pZ)), "\n"),
-		pi = paste0("pi = ", as.character(checkVec(pi)), "\n"),
-		N = paste0("N = ", as.character(checkVec(N)), "\n"),
-		kappa = paste0("kappa = ", as.character(checkVec(kappa)), "\n"),
-		tau = paste0("tau = ", as.character(checkVec(tau)), "\n"),
-		omega = paste0("omega = ", as.character(checkVec(omega)), "\n"),
-		power = paste0("Power = ", as.character(checkVec(power)), "\n"),
-		sig.level = paste0("sig.level  = ", as.character(checkVec(sig.level)), "\n\n"))
-
-	if (!effect.size) input$kappa <- NULL
-	input <- input[!grepl(pattern = "= \n", x=unlist(input))]
-	cat(unlist(input))
-	
-	multiple.input <- names(input[grepl(pattern = "= Multiple", x=unlist(input))])
-	output.name <- c(c("kappa", "N", "power")[target], paste0("User-inputted ", multiple.input))
-
 	if (length(out)==1 && any(out<0, !is.finite(out))){
 		stop("The returned value is invalid. Results are not feasible with given parameters. You must increase the values of pi and/or N")
 	}
@@ -221,17 +198,41 @@ powerLATE <- function(
 		}	
 	}
 
-	message.target <- c("(upper) bound for kappa (minimum detectable effect size)", 
-		"(upper) bound for N (required sample size)", 
-		"(lower) bound for Power")
+	if (is.null(kappa)){
+		target <- 1
+	}else if (is.null(N)){
+		target <- 2
+	}else if (is.null(power)){
+		target <- 3
+	}
+
+	input <- list(main = paste0("Power analysis for two-sided test that LATE equals zero", "\n\n"),
+		pZ = paste0("pZ = ", checkVec(pZ), "\n"),
+		pi = paste0("pi = ", checkVec(pi), "\n"),
+		N = paste0("N = ", checkVec(N), "\n"),
+		kappa = paste0("kappa = ", checkVec(kappa), "\n"),
+		tau = paste0("tau = ", checkVec(tau), "\n"),
+		omega = paste0("omega = ", checkVec(omega), "\n"),
+		power = paste0("Power = ", checkVec(power), "\n"),
+		sig.level = paste0("sig.level  = ", checkVec(sig.level)))
+
+	if (!effect.size) input$kappa <- NULL
+	input <- input[!grepl(pattern = "no inputted value", x=unlist(input))]
+	message.input <- (unlist(input))
+	multiple.input <- names(input[grepl(pattern = "= Multiple", x=unlist(input))])
+	output.name <- c(c("kappa", "N", "power")[target], paste0("User-inputted ", multiple.input))
+
+	message.target <- c("(upper) bound for kappa (minimum detectable effect size):", 
+		"(upper) bound for N (required sample size):", 
+		"(lower) bound for Power:")
 
 	if (!effect.size && target==1){
 		out <- out*omega
 		output.name[1]  <- "tau"
-		message.target[1] <- "(upper) bound for tau (minimum detectable effect)"
+		message.target[1] <- "(upper) bound for tau (minimum detectable effect):"
 	}
 	
-	cat(paste0("Given these parameter values, the conservative ", message.target[target], ":\n"))
+	message.output <- (paste0("\n\nGiven these parameter values, the conservative ", message.target[target], "\n"))
 
 	if(length(multiple.input)!=0){	
 		res <- structure(list( 
@@ -247,20 +248,30 @@ powerLATE <- function(
 		names(res) <- output.name[1]
 		output <- res
 	}
-	
-	print(res, right=F)
 
-	if (pZ == 0.5 && !assume.ord.means){
-		cat("\nNOTE: The Ordered-Means assumption is not being employed. If the user would like to make this assumption to narrow the bounds, set the argument assume.ord.means to TRUE.", fill=TRUE)
+	if (pZ == 0.5 && !assume.ord.means && verbose){
+		note <- "The Ordered-Means assumption is not being employed. If the user would like to make this assumption to narrow the bounds, set the argument assume.ord.means to TRUE."
+		cat(message.input, message.output)
+		print(res, right=F)
+		cat("\nNOTE: ", note, "\n")
 	} 
-	if (pZ == 0.5 && assume.ord.means){
-		cat("\nNOTE: The Ordered-Means assumption is being employed. User should confirm that the assumption is reasonable in the context of interest.", fill=TRUE)
+	if (pZ == 0.5 && assume.ord.means && verbose){
+		note <- "The Ordered-Means assumption is being employed. User should confirm that the assumption is reasonable in the context of interest."
+		cat(message.input, message.output)
+		print(res, right=F)
+		cat("\nNOTE: ", note, "\n")
 	} 
-	if (pZ != 0.5 && !assume.ord.means){
-		cat("\nNOTE: The Ordered-Means assumption is not being employed. If the user would like to make this assumption to narrow the bounds, set the argument assume.ord.means to TRUE. The Homoskedasticity assumption is currently being made because pZ does not equal 0.5.", fill=TRUE)
+	if (pZ != 0.5 && !assume.ord.means && verbose){
+		note <- "The Ordered-Means assumption is not being employed. If the user would like to make this assumption to narrow the bounds, set the argument assume.ord.means to TRUE. The Homoskedasticity assumption is currently being made because pZ does not equal 0.5."
+		cat(message.input, message.output)
+		print(res, right=F)
+		cat("\nNOTE: ", note, "\n")
 	} 
-	if (pZ != 0.5 && assume.ord.means){
-		cat("\nNOTE: The Ordered-Means assumption is being employed. User should confirm that the assumption is reasonable in the context of interest. The Homoskedasticity assumption is currently being made because pZ does not equal 0.5.", fill=TRUE)
+	if (pZ != 0.5 && assume.ord.means && verbose){
+		note <- "The Ordered-Means assumption is being employed. User should confirm that the assumption is reasonable in the context of interest. The Homoskedasticity assumption is currently being made because pZ does not equal 0.5."
+		cat(message.input, message.output)
+		print(res, right=F)
+		cat("\nNOTE: ", note, "\n")
 	} 
 
 	out <- list(input.parameter=input.para, output.parameter=output)
