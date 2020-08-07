@@ -45,5 +45,5 @@ Bansak, K. (2020). A Generalized Approach to Power Analysis for Local Average Tr
 \code{\link{equal.ordered.cov}}, \code{\link{unequal.ordered.cov}}, \code{\link{unequal.unordered.cov}}.
 }
 \author{
-Kirk Bansak
+Kirk Bansak and Eddie Yang
 }

@@ -8,7 +8,7 @@
 #' @param power         power of test (1 minus Type II error probability)
 #' @return A vector of values for one in {kappa, N, power} that is not supplied by the user.
 #' @note This function is called internally and thus should not be used directly.
-#' @author Kirk Bansak
+#' @author Kirk Bansak and Eddie Yang
 #' @seealso \code{\link{equal.unordered}}, \code{\link{equal.ordered}}, \code{\link{unequal.ordered}}.
 #' @importFrom stats pnorm qnorm
 #' @references Bansak, K. (2020). A Generalized Approach to Power Analysis for Local Average Treatment Effects. Statistical Science, 35(2), 254-271.

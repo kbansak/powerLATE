@@ -3,7 +3,7 @@
 #' @param val       parameter
 #' @return Either a string message or val.
 #' @note This function is called internally and thus should not be used directly.
-#' @author Kirk Bansak
+#' @author Kirk Bansak and Eddie Yang
 
 checkVec <- function(val){
 	if (length(val) == 0){

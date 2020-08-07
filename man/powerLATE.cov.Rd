@@ -2,7 +2,7 @@
 % Please edit documentation in R/powerLATE_cov.R
 \name{powerLATE.cov}
 \alias{powerLATE.cov}
-\title{Power Analysis for Local Average Treatment Effect w/ covariates}
+\title{Generalized Power Analysis for LATE wth covariates}
 \usage{
 powerLATE.cov(pZ = 0.5, pi, N, kappa,
 	sig.level = 0.05, power,

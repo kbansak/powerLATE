@@ -2,7 +2,7 @@
 % Please edit documentation in R/powerLATE.R
 \name{powerLATE}
 \alias{powerLATE}
-\title{Power Analysis for Local Average Treatment Effect}
+\title{Generalized Power Analysis for LATE}
 \usage{
 powerLATE(pZ = 0.5, pi, N, kappa,
 	sig.level = 0.05, power,

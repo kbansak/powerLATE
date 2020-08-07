@@ -19,5 +19,5 @@ Check if input is of length greater than 1 and convert to string message if so.
 This function is called internally and thus should not be used directly.
 }
 \author{
-Kirk Bansak
+Kirk Bansak and Eddie Yang
 }

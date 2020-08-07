@@ -1,4 +1,4 @@
-#' @title Power Analysis for Local Average Treatment Effect w/ covariates
+#' @title Generalized Power Analysis for LATE wth covariates
 #' @aliases powerLATE.cov
 #' @description Function to perform generalized power analysis for the LATE (i.e. under noncompliance with treatment assignment), 
 #' allowing for covariate adjustment. Function allows for user to work with either standardized effect sizes or absolute effects. 
@@ -257,7 +257,7 @@ powerLATE.cov <- function(
 
 	message.output <- paste0("\n\nGiven these parameter values, the conservative ", message.target[target], "\n")
 
-	if(length(multiple.input)!=0){
+	if (length(multiple.input)!=0){
 		res <- structure(list(
         	target = out,
         	multiple.input = eval(parse(text=multiple.input))),
@@ -272,30 +272,23 @@ powerLATE.cov <- function(
 		output <- res[output.name[1]]
 	}
 
-	if (pZ == 0.5 && !assume.ord.means && verbose){
+	if (pZ == 0.5 && !assume.ord.means){
 		note <- "The Ordered-Means assumption is not being employed. If the user would like to make this assumption to narrow the bounds, set the argument assume.ord.means to TRUE."
-		cat(message.input, message.output)
-		print(res, right=F)
-		cat("\nNOTE: ", note, "\n")
 	} 
-	if (pZ == 0.5 && assume.ord.means && verbose){
+	if (pZ == 0.5 && assume.ord.means){
 		note <- "The Ordered-Means assumption is being employed. User should confirm that the assumption is reasonable in the context of interest."
-		cat(message.input, message.output)
-		print(res, right=F)
-		cat("\nNOTE: ", note, "\n")
 	} 
-	if (pZ != 0.5 && !assume.ord.means && verbose){
+	if (pZ != 0.5 && !assume.ord.means){
 		note <- "The Ordered-Means assumption is not being employed. If the user would like to make this assumption to narrow the bounds, set the argument assume.ord.means to TRUE. The Homoskedasticity assumption is currently being made because pZ does not equal 0.5."
-		cat(message.input, message.output)
-		print(res, right=F)
-		cat("\nNOTE: ", note, "\n")
 	} 
-	if (pZ != 0.5 && assume.ord.means && verbose){
+	if (pZ != 0.5 && assume.ord.means){
 		note <- "The Ordered-Means assumption is being employed. User should confirm that the assumption is reasonable in the context of interest. The Homoskedasticity assumption is currently being made because pZ does not equal 0.5."
-		cat(message.input, message.output)
-		print(res, right=F)
-		cat("\nNOTE: ", note, "\n")
 	} 
+
+	if (verbose){
+		print.powerLATE(message.input=message.input, message.output=message.output,
+			res=res, note=note)
+	}
 
 	out <- list(input.parameter=input.para, output.parameter=output)
 	return(invisible(out))
