@@ -7,16 +7,16 @@
 #' 	sig.level = 0.05, power,
 #' 	effect.size = TRUE, tau = NULL, omega = NULL,
 #' 	assume.ord.means = FALSE, verbose = TRUE)
-#' @param pZ            	probability of being assigned to treatment. Default is 0.5, i.e. equal assignment probability.
-#' @param pi            	compliance rate. Equivalently, average causal effect of treatment assignment on treatment uptake.
-#' @param N             	total sample size.
-#' @param kappa         	LATE effect size (i.e. effect size for compliers).
-#' @param sig.level     	significance level (Type I error probability). Default is 0.05.
-#' @param power         	power of test (1 minus Type II error probability).
-#' @param effect.size   	whether effect size (kappa) rather than absolute effect (tau) is used in power calculations. Default is \code{TRUE}.
-#' @param tau           	LATE absolute effect (i.e. absolute effect for compliers). Must only be supplied if \code{effect.size = FALSE}.
-#' @param omega				within-group standard deviation of the outcome. Must be supplied if \code{effect.size = FALSE}. See Details.
-#' @param assume.ord.means	whether ordered means assumption is made. Default is \code{FALSE}. See Details.
+#' @param pZ                probability of being assigned to treatment. Default is 0.5, i.e. equal assignment probability.
+#' @param pi                compliance rate. Equivalently, average causal effect of treatment assignment on treatment uptake.
+#' @param N                 total sample size.
+#' @param kappa             LATE effect size (i.e. effect size for compliers).
+#' @param sig.level         significance level (Type I error probability). Default is 0.05.
+#' @param power             power of test (1 minus Type II error probability).
+#' @param effect.size       whether effect size (kappa) rather than absolute effect (tau) is used in power calculations. Default is \code{TRUE}.
+#' @param tau               LATE absolute effect (i.e. absolute effect for compliers). Must only be supplied if \code{effect.size = FALSE}.
+#' @param omega             within-group standard deviation of the outcome. Must be supplied if \code{effect.size = FALSE}. See Details.
+#' @param assume.ord.means  whether ordered means assumption is made. Default is \code{FALSE}. See Details.
 #' @param verbose           print input and output parameter values. Default is \code{TRUE}.
 #' @details If \code{effect.size = TRUE} (the default setting), exactly two of the parameters \{\code{kappa, N, power}\} must be supplied, 
 #' from which the third (target) parameter will be calculated. If \code{effect.size = FALSE}, \code{omega} must be supplied, and exactly two of 
@@ -37,7 +37,7 @@
 #' @return A list that includes the values of the input parameters supplied by the user (\code{input.parameter}) and the corresponding output value(s) 
 #' of the target parameter (\code{output.parameter}).
 #' 
-#' Note also that the results along with additional information will be displayed in the console.
+#' Note also that the results along with additional information will be displayed in the console if \code{verbose = TRUE}.
 #' @author Kirk Bansak and Eddie Yang
 #' @references Bansak, K. (2020). A Generalized Approach to Power Analysis for Local Average Treatment Effects. Statistical Science, 35(2), 254-271.
 #' @export

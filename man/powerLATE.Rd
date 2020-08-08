@@ -36,7 +36,7 @@ powerLATE(pZ = 0.5, pi, N, kappa,
 A list that includes the values of the input parameters supplied by the user (\code{input.parameter}) and the corresponding output value(s) 
 of the target parameter (\code{output.parameter}).
 
-Note also that the results along with additional information will be displayed in the console.
+Note also that the results along with additional information will be displayed in the console if \code{verbose = TRUE}.
 }
 \description{
 Function to perform generalized power analysis for the LATE (i.e. under noncompliance with treatment assignment). 
