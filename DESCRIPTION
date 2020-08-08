@@ -1,6 +1,6 @@
 Package: powerLATE
 Type: Package
-Title: A Generalized Approach to Power Analysis for Local Average Treatment Effects
+Title: Generalized Power Analysis for LATE
 Version: 0.1.0
 Authors@R: c(
   person("Kirk", "Bansak", , "kbansak@ucsd.edu", c("aut")),
