@@ -63,7 +63,7 @@ powerLATE provides two main functions:
 
 ## Navigating main functions
 
-![](/Users/eddie/Documents/powerLATE/powerLATE_tree.png)
+![](https://github.com/kbansak/powerLATE/blob/master/powerLATE_tree.png)
 
 ## Examples
 
