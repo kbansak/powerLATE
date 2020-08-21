@@ -15,10 +15,20 @@ knitr::opts_chunk$set(
 
 # powerLATE
 
+```{r echo=FALSE, results="hide", message=FALSE}
+library("badger")
+```
+
 <!-- badges: start -->
+```{r, echo = FALSE, results='asis'}
+cat(badge_cran_release("powerLATE", "green"))
+```
 [![Travis build status](https://travis-ci.com/kbansak/powerLATE.svg?branch=master)](https://travis-ci.com/kbansak/powerLATE)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/kbansak/powerLATE?branch=master&svg=true)](https://ci.appveyor.com/project/kbansak/powerLATE)
 [![Codecov test coverage](https://codecov.io/gh/kbansak/powerLATE/branch/master/graph/badge.svg)](https://codecov.io/gh/kbansak/powerLATE?branch=master)
+```{r, echo = FALSE, results='asis'}
+cat(badge_cran_download("powerLATE", "grand-total", "blue"))
+```
 <!-- badges: end -->
 
 powerLATE implements the generalized power analysis for the local average treatment effect (LATE), proposed by [Bansak (2020)](https://projecteuclid.org/download/pdfview_1/euclid.ss/1591171230).
@@ -51,10 +61,15 @@ powerLATE provides two main functions:
 
 * `powerLATE.cov`, which is similar to `powerLATE` but additioanlly allows the inclusion of covariates. 
 
+## Navigating main functions
+
+![](/Users/eddie/Documents/powerLATE/powerLATE_tree.png)
 
 ## Examples
 
-Suppose we are interested in the power of an experiment, in which exactly half of the experimental subjects will be assigned to treatment and the other half to control. Further suppose the sample size is 800, the compliance rate is 0.35 and the treatment effect size is 0.8. We can compute the power of this experiment by the following:
+Suppose we want to recover power, without making the ordered-means assumption, 
+
+we are interested in the power of an experiment, in which exactly half of the experimental subjects will be assigned to treatment and the other half to control. Further suppose the sample size is 800, the compliance rate is 0.35 and the treatment effect size is 0.8. We can compute the power of this experiment by the following:
 
 ```{r}
 library(powerLATE)
