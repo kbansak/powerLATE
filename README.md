@@ -64,7 +64,7 @@ powerLATE provides two main functions:
 ![](https://github.com/kbansak/powerLATE/blob/master/powerLATE_tree.png)
 
 For examples on how to use the package, see
-[here](https://github.com/kbansak/powerLATE/blob/master/powerLATE_Examples.html)
+[here](https://htmlpreview.github.io/?https://github.com/kbansak/powerLATE/blob/master/powerLATE_Examples.html)
 
 ## Reference
 
