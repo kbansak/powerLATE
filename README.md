@@ -61,10 +61,10 @@ powerLATE provides two main functions:
 
 ## Navigating main functions
 
-![](https://github.com/kbansak/powerLATE/blob/master/aux/powerLATE_tree.png)
+![](https://github.com/EddieYang211/powerLATE_aux/blob/master/powerLATE_tree.png?raw=true)
 
 For examples on how to use the package, see
-[here](https://htmlpreview.github.io/?https://github.com/kbansak/powerLATE/blob/master/aux/powerLATE_Examples.html)
+[here](https://htmlpreview.github.io/?https://github.com/EddieYang211/powerLATE_aux/blob/master/powerLATE_Examples.html)
 
 ## Reference
 
