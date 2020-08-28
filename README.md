@@ -54,10 +54,10 @@ library(powerLATE)
 powerLATE provides two main functions:
 
   - `powerLATE()`, which computes the power of the Wald IV estimator, or
-    determines parameters to obtain a target power.
+    determines parameters (e.g. required sample size) to obtain a target power.
 
   - `powerLATE.cov()`, which is similar to `powerLATE()` but
-    additioanlly allows the inclusion of covariates.
+    additionally allows the inclusion of covariates.
 
 ## Navigating main functions
 
