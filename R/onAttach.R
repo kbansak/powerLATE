@@ -1,5 +1,5 @@
 #' @title Subsidiary PowerLATE Function
-#' @description Subsidiary function to perform power calculation under equal assignment probability and ordered mean assumption.
+#' @description Function to load package description.
 #' @param lib   libname
 #' @param pkg   package name
 #' @importFrom utils packageDescription
