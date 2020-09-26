@@ -1,7 +1,7 @@
 Package: powerLATE
 Type: Package
 Title: Generalized Power Analysis for LATE
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
   person("Kirk", "Bansak", , "kbansak@ucsd.edu", c("aut")),
   person("Eddie", "Yang", , "z5yang@ucsd.edu", c("aut", "cre"))
