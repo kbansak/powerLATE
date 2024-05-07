@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 
 # powerLATE
 
-```{r echo=FALSE, results="hide", message=FALSE}
+```{r echo=FALSE, results="hide", message=FALSE, warning=FALSE}
 library("badger")
 ```
 
@@ -65,8 +65,13 @@ powerLATE provides two main functions:
 
 ![](https://github.com/EddieYang211/powerLATE_aux/blob/master/powerLATE_tree.png?raw=true)
 
-## Examples
-For examples on how to use the package, see [here](https://htmlpreview.github.io/?https://github.com/EddieYang211/powerLATE_aux/blob/master/powerLATE_Examples.html)
+## Tutorial
+
+For a comprehensive tutorial on conducting a LATE power analysis with this package, see [here](https://github.com/kbansak/powerLATE_tutorial)
+
+## More Examples
+
+For more examples on how to use the package, see [here](https://htmlpreview.github.io/?https://github.com/EddieYang211/powerLATE_aux/blob/master/powerLATE_Examples.html)
 
 ## Reference
 

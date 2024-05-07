@@ -49,33 +49,42 @@ devtools::install_github("kbansak/powerLATE")
 
 ``` r
 library(powerLATE)
+#> powerLATE: Generalized Power Analysis for LATE
+#> Version: 0.1.1
+#> Reference: Bansak, K. (2020). A Generalized Approach to Power Analysis for Local Average Treatment Effects. Statistical Science, 35(2), 254-271.
 ```
 
 powerLATE provides two main functions:
 
-  - `powerLATE()`, which computes the power of the Wald IV estimator, or
-    determines parameters (e.g. required sample size) to obtain a target power.
+- `powerLATE()`, which computes the power of the Wald IV estimator, or
+  determines parameters (e.g. required sample size) to obtain a target
+  power.
 
-  - `powerLATE.cov()`, which is similar to `powerLATE()` but
-    additionally allows the inclusion of covariates.
+- `powerLATE.cov()`, which is similar to `powerLATE()` but additionally
+  allows the inclusion of covariates.
 
 ## Navigating main functions
 
 ![](https://github.com/EddieYang211/powerLATE_aux/blob/master/powerLATE_tree.png?raw=true)
 
-## Examples
+## Tutorial
 
-For examples on how to use the package, see
+For a comprehensive tutorial on conducting a LATE power analysis with
+this package, see [here](https://github.com/kbansak/powerLATE_tutorial)
+
+## More Examples
+
+For more examples on how to use the package, see
 [here](https://htmlpreview.github.io/?https://github.com/EddieYang211/powerLATE_aux/blob/master/powerLATE_Examples.html)
 
 ## Reference
 
 For a detailed description of the method see:
 
-  - [Bansak, K. (2020). A Generalized Approach to Power Analysis for
-    Local Average Treatment
-    Effects](https://projecteuclid.org/download/pdfview_1/euclid.ss/1591171230)
+- [Bansak, K. (2020). A Generalized Approach to Power Analysis for Local
+  Average Treatment
+  Effects](https://projecteuclid.org/download/pdfview_1/euclid.ss/1591171230)
 
 ## Maintainer
 
-  - [Eddie Yang](https://github.com/EddieYang211)
+- [Eddie Yang](https://github.com/EddieYang211)
