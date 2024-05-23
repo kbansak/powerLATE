@@ -31,7 +31,7 @@ cat(badge_cran_download("powerLATE", "grand-total", "blue"))
 ```
 <!-- badges: end -->
 
-powerLATE implements the generalized power analysis for the local average treatment effect (LATE), proposed by [Bansak (2020)](https://projecteuclid.org/download/pdfview_1/euclid.ss/1591171230).
+powerLATE implements the generalized power analysis for the local average treatment effect (LATE), proposed by [Bansak (2020)](https://projecteuclid.org/download/pdfview_1/euclid.ss/1591171230). A comprehensive tutorial on using this package [can be found here](https://github.com/kbansak/powerLATE_tutorial).
 
 Power analysis is in the context of estimating the LATE (also known as the complier average causal effect, or CACE), with calculations based on a test of the null hypothesis that the LATE equals 0 with a two-sided alternative. The method uses standardized effect sizes to place a conservative bound on the power under minimal assumptions. powerLATE allows users to recover power, sample size requirements, or minimum detectable effect sizes. It also allows users to work with absolute effects rather than effect sizes, to specify an additional assumption to narrow the bounds, and to incorporate covariate adjustment.
 
@@ -67,11 +67,11 @@ powerLATE provides two main functions:
 
 ## Tutorial
 
-For a comprehensive tutorial on conducting a LATE power analysis with this package, see [here](https://github.com/kbansak/powerLATE_tutorial)
+For a comprehensive tutorial on conducting a LATE power analysis with this package, see [here](https://github.com/kbansak/powerLATE_tutorial).
 
 ## More Examples
 
-For more examples on how to use the package, see [here](https://htmlpreview.github.io/?https://github.com/EddieYang211/powerLATE_aux/blob/master/powerLATE_Examples.html)
+For more examples on how to use the package, see [here](https://htmlpreview.github.io/?https://github.com/EddieYang211/powerLATE_aux/blob/master/powerLATE_Examples.html).
 
 ## Reference
 
