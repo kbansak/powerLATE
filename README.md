@@ -8,8 +8,8 @@
 [![](https://www.r-pkg.org/badges/version/powerLATE?color=green)](https://cran.r-project.org/package=powerLATE)
 [![Codecov test
 coverage](https://codecov.io/gh/kbansak/powerLATE/branch/master/graph/badge.svg)](https://codecov.io/gh/kbansak/powerLATE?branch=master)
-cat(badge_cran_download(“powerLATE”, “grand-total”, “blue”))
 [![R-CMD-check](https://github.com/kbansak/powerLATE/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kbansak/powerLATE/actions/workflows/R-CMD-check.yaml)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/powerLATE?color=blue)](https://cran.r-project.org/package=powerLATE)
 <!-- badges: end -->
 
 powerLATE implements the generalized power analysis for the local

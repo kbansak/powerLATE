@@ -24,8 +24,10 @@ library("badger")
 cat(badge_cran_release("powerLATE", "green"))
 ```
 [![Codecov test coverage](https://codecov.io/gh/kbansak/powerLATE/branch/master/graph/badge.svg)](https://codecov.io/gh/kbansak/powerLATE?branch=master)
-cat(badge_cran_download("powerLATE", "grand-total", "blue"))
 [![R-CMD-check](https://github.com/kbansak/powerLATE/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kbansak/powerLATE/actions/workflows/R-CMD-check.yaml)
+```{r, echo = FALSE, results='asis'}
+cat(badge_cran_download("powerLATE", "grand-total", "blue"))
+```
 <!-- badges: end -->
 
 powerLATE implements the generalized power analysis for the local average treatment effect (LATE), proposed by [Bansak (2020)](https://projecteuclid.org/download/pdfview_1/euclid.ss/1591171230). A comprehensive tutorial on using this package [can be found here](https://github.com/kbansak/powerLATE_tutorial).
