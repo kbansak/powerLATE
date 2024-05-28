@@ -24,8 +24,8 @@ equal.unordered.cov <- function(
 	r2yw = NULL){
 
 	G <- (0.5-(pi/2))*(0.5+(pi/2))
-	S <- 1-r2yw^2
-	T <- 1-r2dw^2
+	S <- 1-r2yw
+	T <- 1-r2dw
 
 	# mdes
 	if (!is.null(power) && !is.null(N)){

@@ -25,8 +25,8 @@ unequal.unordered.cov <- function(
 	r2dw = NULL,
 	r2yw = NULL){
 
-	S <- 1-r2yw^2
-	T <- 1-r2dw^2
+	S <- 1-r2yw
+	T <- 1-r2dw
 	J <- pZ*(1-pZ)
 
 	# mdes

@@ -1,7 +1,7 @@
 Package: powerLATE
 Type: Package
 Title: Generalized Power Analysis for LATE
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(
   person("Kirk", "Bansak", , "kbansak@ucsd.edu", c("aut")),
   person("Eddie", "Yang", , "z5yang@ucsd.edu", c("aut", "cre"))
@@ -12,7 +12,5 @@ License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0
-URL: https://github.com/kbansak/powerLATE
+URL: https://github.com/kbansak/powerLATE_tutorial, https://github.com/kbansak/powerLATE
 BugReports: https://github.com/kbansak/powerLATE/issues
-Suggests: 
-    covr
