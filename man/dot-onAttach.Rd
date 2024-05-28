@@ -12,7 +12,7 @@
 \item{pkg}{package name}
 }
 \description{
-Subsidiary function to perform power calculation under equal assignment probability and ordered mean assumption.
+Function to load package description.
 }
 \references{
 Bansak, K. (2020). A Generalized Approach to Power Analysis for Local Average Treatment Effects. Statistical Science, 35(2), 254-271.

@@ -6,13 +6,10 @@
 <!-- badges: start -->
 
 [![](https://www.r-pkg.org/badges/version/powerLATE?color=green)](https://cran.r-project.org/package=powerLATE)
-[![Travis build
-status](https://travis-ci.com/kbansak/powerLATE.svg?branch=master)](https://travis-ci.com/kbansak/powerLATE)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/kbansak/powerLATE?branch=master&svg=true)](https://ci.appveyor.com/project/kbansak/powerLATE)
 [![Codecov test
 coverage](https://codecov.io/gh/kbansak/powerLATE/branch/master/graph/badge.svg)](https://codecov.io/gh/kbansak/powerLATE?branch=master)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/powerLATE?color=blue)](https://cran.r-project.org/package=powerLATE)
+cat(badge_cran_download(“powerLATE”, “grand-total”, “blue”))
+[![R-CMD-check](https://github.com/kbansak/powerLATE/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kbansak/powerLATE/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 powerLATE implements the generalized power analysis for the local
@@ -52,7 +49,7 @@ devtools::install_github("kbansak/powerLATE")
 ``` r
 library(powerLATE)
 #> powerLATE: Generalized Power Analysis for LATE
-#> Version: 0.1.1
+#> Version: 0.1.2
 #> Reference: Bansak, K. (2020). A Generalized Approach to Power Analysis for Local Average Treatment Effects. Statistical Science, 35(2), 254-271.
 ```
 
