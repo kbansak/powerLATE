@@ -286,8 +286,7 @@ powerLATE.cov <- function(
 	} 
 
 	if (verbose){
-		print.powerLATE(message.input=message.input, message.output=message.output,
-			res=res, note=note)
+		print.powerLATE(list(message.input=message.input, message.output=message.output, res=res, note=note))
 	}
 
 	out <- list(input.parameter=input.para, output.parameter=output)

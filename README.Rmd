@@ -23,7 +23,7 @@ library("badger")
 ```{r, echo = FALSE, results='asis'}
 cat(badge_cran_release("powerLATE", "green"))
 ```
-[![Codecov test coverage](https://codecov.io/gh/kbansak/powerLATE/branch/master/graph/badge.svg)](https://codecov.io/gh/kbansak/powerLATE?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/kbansak/powerLATE/branch/master/graph/badge.svg)](https://app.codecov.io/gh/kbansak/powerLATE?branch=master)
 [![R-CMD-check](https://github.com/kbansak/powerLATE/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kbansak/powerLATE/actions/workflows/R-CMD-check.yaml)
 ```{r, echo = FALSE, results='asis'}
 cat(badge_cran_download("powerLATE", "grand-total", "blue"))

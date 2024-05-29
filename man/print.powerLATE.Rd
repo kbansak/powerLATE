@@ -4,16 +4,12 @@
 \alias{print.powerLATE}
 \title{Print Function for powerLATE}
 \usage{
-\method{print}{powerLATE}(message.input, message.output, res, note)
+\method{print}{powerLATE}(x, ...)
 }
 \arguments{
-\item{message.input}{vector of strings specifying input parameters.}
+\item{x}{List of message.input, message.output, res, note to be printed}
 
-\item{message.output}{string prompt specifying the target parameter.}
-
-\item{res}{dataframe of output parameters.}
-
-\item{note}{note specifying assumptions made and additional details.}
+\item{...}{Further arguments to be passed to \code{print.powerLATE()}.}
 }
 \value{
 strings and a dataframe for output.

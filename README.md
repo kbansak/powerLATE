@@ -7,7 +7,7 @@
 
 [![](https://www.r-pkg.org/badges/version/powerLATE?color=green)](https://cran.r-project.org/package=powerLATE)
 [![Codecov test
-coverage](https://codecov.io/gh/kbansak/powerLATE/branch/master/graph/badge.svg)](https://codecov.io/gh/kbansak/powerLATE?branch=master)
+coverage](https://codecov.io/gh/kbansak/powerLATE/branch/master/graph/badge.svg)](https://app.codecov.io/gh/kbansak/powerLATE?branch=master)
 [![R-CMD-check](https://github.com/kbansak/powerLATE/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kbansak/powerLATE/actions/workflows/R-CMD-check.yaml)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/powerLATE?color=blue)](https://cran.r-project.org/package=powerLATE)
 <!-- badges: end -->

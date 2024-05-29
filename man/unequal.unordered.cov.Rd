@@ -33,7 +33,7 @@ unequal.unordered.cov(
 \item{r2yw}{proportion of variation in Y left unexplained by Z that is explained by W.}
 }
 \value{
-A vector of values for one in {kappa, N, power} that is not supplied by the user.
+A vector of values for one in \{kappa, N, power\} that is not supplied by the user.
 }
 \description{
 Subsidiary function to perform power calculation with covariates under unequal assignment probability without ordered mean assumption.

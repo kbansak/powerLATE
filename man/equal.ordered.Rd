@@ -24,7 +24,7 @@ equal.ordered(
 \item{N}{total number of observations}
 }
 \value{
-A vector of values for one in {kappa, N, power} that is not supplied by the user.
+A vector of values for one in \{kappa, N, power\} that is not supplied by the user.
 }
 \description{
 Subsidiary function to perform power calculation under equal assignment probability and ordered mean assumption.

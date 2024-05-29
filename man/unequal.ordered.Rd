@@ -27,7 +27,7 @@ unequal.ordered(
 \item{pZ}{probability of being assigned to treatment.}
 }
 \value{
-A vector of values for one in {kappa, N, power} that is not supplied by the user.
+A vector of values for one in \{kappa, N, power\} that is not supplied by the user.
 }
 \description{
 Subsidiary function to perform power calculation under unequal assignment probability and ordered mean assumption.

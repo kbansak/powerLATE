@@ -6,7 +6,7 @@
 #' @param kappa         effect size
 #' @param sig.level     significance level (Type I error probability).
 #' @param power         power of test (1 minus Type II error probability)
-#' @return A vector of values for one in {kappa, N, power} that is not supplied by the user.
+#' @return A vector of values for one in \{kappa, N, power\} that is not supplied by the user.
 #' @note This function is called internally and thus should not be used directly.
 #' @author Kirk Bansak and Eddie Yang
 #' @seealso \code{\link{equal.unordered}}, \code{\link{equal.ordered}}, \code{\link{unequal.unordered}}.
